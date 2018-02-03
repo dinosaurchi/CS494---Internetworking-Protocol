@@ -1,0 +1,17 @@
+package database;
+
+import Entity.MyImageInfo;
+import Entity.User;
+
+public class UserDatabase {
+	private DatabaseConnect database = null;
+	private String USER_TABLE = "User";
+	
+	public UserDatabase(DatabaseConnect db) {
+		this.database = db;
+	}
+	
+	public int put(User user) {
+		
+	}
+}

@@ -1,0 +1,1 @@
+function dynEvents(link,action,label){try{dataLayer.push({'event':action,'action':action,'label':label})}catch(err){}if(link!="no link"){setTimeout(function(){document.location.href=link.href},100)}}

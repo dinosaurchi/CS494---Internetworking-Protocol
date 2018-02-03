@@ -1,0 +1,150 @@
+package Entity;
+
+import java.util.HashMap;
+
+public class MyImageInfo {
+	private Integer imageId = -1;
+	private String imageName = "";
+	private String theme = "";
+	private String type = "";
+	private int height = 0;
+	private int width = 0;
+	private String note = "";
+	private String imageOwnerUsername = "";
+	private String imageLink = "";
+	
+	public static final String FILTER_IMAGE_OWNER = "OWNER";
+	public static final String FILTER_IMAGE_THEME = "THEME";
+
+	public static MyImageInfo reconstructImageInfoFromQueryResult(HashMap<String, String> resultMap){
+		MyImageInfo imageInfo = new MyImageInfo();
+		imageInfo.setImageId(resultMap.get("imageId"));
+		imageInfo.setImageName(resultMap.get("imageName"));
+		imageInfo.setTheme(resultMap.get("theme"));
+		imageInfo.setType(resultMap.get("type"));
+		imageInfo.setHeight(resultMap.get("height"));
+		imageInfo.setWidth(resultMap.get("width"));
+		imageInfo.setNote(resultMap.get("note"));
+		imageInfo.setImageOwnerUsername(resultMap.get("imageOwnerUsername"));
+		imageInfo.setImageLink(resultMap.get("imageLink"));
+		
+		return imageInfo;
+	}
+	
+	public static String[] getAllAttributeNames() {
+		String [] a = {"imageId", "imageName", "theme", "type", 
+				"height", 
+				"width", 
+				"note", 
+				"imageOwnerUsername",
+				"imageLink"};
+		return a;
+	}
+	
+	public String[] getAllValues() {
+		String[] a = {imageId.toString(), imageName, theme, type, 
+				(new Integer(height)).toString(), 
+				(new Integer(width)).toString(), 
+				note,
+				imageOwnerUsername, 
+				imageLink};
+		return a;
+	}
+	
+	public Integer getImageId() {
+		return imageId;
+	}
+
+
+	public void setImageId(String imageId) {
+		this.imageId = Integer.parseInt(imageId);
+	}
+
+	public void setImageId(Integer imageId) {
+		this.imageId = imageId;
+	}
+
+	
+	public String getImageName() {
+		return imageName;
+	}
+
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(String height) {
+		this.height = Integer.parseInt(height);
+	}
+
+
+	public int getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(String width) {
+		this.width = Integer.parseInt(width);
+	}
+
+
+	public String getNote() {
+		return note;
+	}
+
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+
+	public String getTheme() {
+		return theme;
+	}
+
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public static boolean isLegalFilter(String filter) {
+		if (filter != null && (filter.equals(FILTER_IMAGE_OWNER) || filter.equals(FILTER_IMAGE_THEME)))
+			return true;
+		return false;
+	}
+
+	public String getImageOwnerUsername() {
+		return imageOwnerUsername;
+	}
+
+	public void setImageOwnerUsername(String imageOwnerUsername) {
+		this.imageOwnerUsername = imageOwnerUsername;
+	}
+
+	public String getImageLink() {
+		return imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
+	
+	
+}

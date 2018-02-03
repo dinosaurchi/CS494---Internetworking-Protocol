@@ -1,0 +1,17 @@
+﻿@charset "utf-8";
+html,body,div,form,hr,h1,h2,h3,h4,h5,h6,p,ol,ul,li,dl,dt,dd,fieldset,legend,th,td,blockquote,pre,button,textarea,iframe { margin:0; padding:0;}
+table {font-size:inherit; font:100%; border-collapse:collapse; border-spacing:0;}
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal;}
+filedset,img { border:0;}
+li { list-style:none outside none;}
+a { outline:none;}
+address,caption,cite,code,dfn,em,strong,th,var,optgroup{font-style:inherit;font-weight:inherit;}
+caption,th{text-align:left;}
+legend{color:#000}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+input,button,textarea,select{*font-size:100%}
+select,input,button,textarea,button{font:99% arial,helvetica,clean,sans-serif}
+button {cursor: pointer;}
+
+article,aside,dialog,footer,header,section,footer,nav,figure,menu {display: block;}
+input:focus {outline: none;}

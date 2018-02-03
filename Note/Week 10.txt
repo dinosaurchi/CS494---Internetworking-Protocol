@@ -1,0 +1,13 @@
+Tue, Dec 13, 2016
+
+	Dy(x)=min{
+		c(y,x) + Dx(x), 
+		c(y,z) + Dz(x)
+	}
+
+	Dy(x)=min{
+		2 + 0,
+		1 + 7,
+	} = 2
+
+	

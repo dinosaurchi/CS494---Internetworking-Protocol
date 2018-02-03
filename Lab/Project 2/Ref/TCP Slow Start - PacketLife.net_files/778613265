@@ -1,0 +1,10 @@
+(function(){
+  document.write('<div id="adsatlas-1447920830" style="position:relative;width:728px;height:90px;overflow:hidden">');
+  document.write('<iframe src=\"https://ad.atdmt.com/as/direct;p=11087208046818;as=0;a=11087208578802;crs=11087208578433;cr=11087208578434;i.ts=1481254271/index.html?click=https://adclick.g.doubleclick.net/aclk%3Fsa%3DL%26ai%3DCvULeRhpKWLHKL47m2AS_obaAB7mZzctHuKK_jPoDrgIQASC3gdkXYMG1-g3IAQmpAq9KeOdBkKc-4AIAqAMBqgTEAU_Qm6s1HLKGy0Z80xvcnSVrX6pwL3yPL8DFxfa3owywS6qjbjxNIXnuLSRr8NNOD31nUHHrPdccHau8yAjJsQV49rA78UZI6CpaQ-lpiDCTrnxumc1EnIu6aFVQjTsXSEVeNQx2g5OgGLfMhUzgBFYuX6UZV4GA_OwqDLvbovZQdaaD3GZWm7juztyoCEbD9FKpdiSB-kS8q_ToG8KalaBfYvID5bXkRVqYF_u9d4l18TlsOVoXsLd9bbD_fc-kVhSpto7gBAGgBhGAB9zXikKoB6a-G9gHANIIBQiAYRAB%26num%3D1%26sig%3DAOD64_2B_GHeThdFIahWPqj_LxXibqQfGQ%26client%3Dca-pub-8592253979949884%26adurl%3D\" width=\"728\" height=\"90\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" topmargin=\"0\" leftmargin=\"0\" allowtransparency=\"true\"></iframe><img src=\"https://ad.atdmt.com/i/img;p=11087208046818;as=0;a=11087208578802;crs=11087208578433;cr=11087208578434;llid=350673311890569276;cache=2989801411\" />');
+  document.write('</div>');
+  document.write('<script src="https://cdn.atlassbx.com/FB/11122200772940/browser_features1469469235.js"></script><script type="text/javascript">(function(window){var data = window.getAtlasBrowserFeatures.getFastBrowserFeatures();new Image().src = "https://sig.atdmt.com/bf?iid=350673311890569276&r=http%3A%2F%2Ftpc.googlesyndication.com%2Fsafeframe%2F1-0-5%2Fhtml%2Fcontainer.html&bf=" + encodeURIComponent(data);})(window.inDapIF ? parent.window : window);</script>');
+  document.write('<script type="text/javascript" src="https://cdn.atlassbx.com/FB/11122200773193/atlas_tots1480453070.js"></script><script type="text/javascript">(function(window){window.initAtlasTOTS("adsatlas-1447920830","350673311890569276","11087208046818","11087208578434");})(window.inDapIF ? parent.window : window);</script>');
+  document.write('');
+  document.write('');
+  document.close();
+})();

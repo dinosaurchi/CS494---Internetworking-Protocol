@@ -1,0 +1,13 @@
+Flush DNS cache: sudo killall -HUP mDNSResponder
+
+Show your IP: ifconfig |grep inet
+
+Show current DNS server IP : 
+	networksetup -getdnsservers Wi-Fi
+or
+	scutil --dns | grep 'nameserver\[[0-9]*\]'
+or
+	$ cat /etc/resolv.conf
+
+
+

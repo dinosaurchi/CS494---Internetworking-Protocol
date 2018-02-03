@@ -1,0 +1,78 @@
+	Tue, Oct 11, 2016 
+	-------------------
+
+	* Chapter 1: 
+
+		Def of Internet: networkd of networks 
+			- Millions of connected computing devices
+				host (end system) : the thing contains the network applications
+			- Communication links
+				transmission rate: bandwidth
+			- Packet switches: forward packets (chunks of data)
+				routers and switches 
+
+		Protocol: controlling the sending and receiving messages procudure
+			TCP, IP, HTTP, Skype....
+
+		Network entity : including host (end system), switch, router,...
+		Network edge : 
+			hosts: clients and servers
+			servers often in data centers
+		Network core : 
+			interconnected routers 
+			network of networks
+
+		Access net: 
+			DSL 
+			Cable network: the frequency increases from the left to the right (of the Channels described in the picture)
+			=> Cable is for sharing access network thus it will be slower if there is multiple people using the same cables, while the speed of DSL is the same, not matter how many people using the network because it has dedicated access to the central office 
+			Home network
+
+		Ethernet (Enterprise access network)
+
+		Wireless access network:
+			Wireless LANs (WiFi)
+			Wide-area wireless access 
+
+		Physical media: 
+			bit, physical link, guided media (transfer via cooper wire,...), unguided media (transfer freely, for instance : radio)
+			Twisted pair cable : we twist 2 core cooper wires because it will reduce electrical interference
+			Coaxial cable: 
+			Fiber optic cable
+
+		Network core: 
+
+		Packet Switching : store-and-forward : When a packet arrives a router, the router has to wait until the entire packet being sent to the router, then forward it 
+
+		Network-core functions: 
+			Routing: 
+				Local forwarding table: comes from routing algorithm
+			Forwarding:
+
+		Circuit switching:
+			FDM: Frequency Division Multiplexing
+			TDM: Time Division Multiplexing
+
+		d_trans : The time it needs to put the packet to the link = L/R 
+		d_prop : The time it needs to propagate the packet on the link = d/s
+		=> 
+
+Internet protocol stack:
+	Application
+		SMTP (Simple mail transfer protocol) : transfer mail 
+		HTTP : for transfering hyper text
+		FPT : transfer file
+
+	Transport: Process-Process (There might have many processes on one host)
+		TCP (Transmission control protocol)
+		UDP (User Datagram protocol)
+
+	Network : Host-Host
+		IP (Internet Protocol)
+		Routing protocols
+
+	Link : 
+		Ethernet, WiFi, PPP
+
+	Physical:
+		bits on wire

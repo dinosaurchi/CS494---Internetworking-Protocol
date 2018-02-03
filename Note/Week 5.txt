@@ -1,0 +1,2 @@
+In midterm there will be a question about calculating checksum
+

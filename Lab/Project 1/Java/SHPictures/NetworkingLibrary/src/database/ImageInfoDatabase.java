@@ -1,0 +1,117 @@
+package database;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Entity.MyImageInfo;
+import Entity.SearchResult;
+import support.SupportFunction;
+
+public class ImageInfoDatabase {
+	private DatabaseConnect database = null;
+	private String IMAGE_TABLE = "Image";
+	
+	public ImageInfoDatabase(DatabaseConnect db) {
+		this.database = db;
+	}
+
+	public ArrayList<SearchResult> retrieveInfo(String searchContent, String filter) {
+		if (searchContent == null || filter == null || !MyImageInfo.isLegalFilter(filter)) {
+			return new ArrayList<>();
+		}
+		
+		ArrayList<SearchResult> result = new ArrayList<>();
+		String query = null;
+		
+		//String [] colums = {"imageId", "imageLink"};
+//		String colums_string = colums[0];
+//		for (int i = 1 ; i < colums.length ; ++i){
+//			colums_string += ", " + colums[i];
+//		}
+		String colums_string = "*";
+		
+		switch (filter) {
+		case MyImageInfo.FILTER_IMAGE_OWNER:
+			query = 
+			"SELECT " + colums_string
+			+ " FROM " + "`" + IMAGE_TABLE + "`" 
+			+ " WHERE " + " imageOwnerUsername LIKE '%" + searchContent +"%' ";
+			break;
+
+		case MyImageInfo.FILTER_IMAGE_THEME:
+			query = 
+			"SELECT " + colums_string
+			+ " FROM " + "`" + IMAGE_TABLE + "`" 
+			+ " WHERE " + " theme LIKE '%" + searchContent +"%' ";
+			break;
+		default:
+			break;
+		}
+		
+		ArrayList<HashMap<String, String>> resultsMap = null;
+		try {
+			resultsMap = database.getData(query, DatabaseConnect.RETRIEVE_ALL_ENTITIES);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		for (HashMap<String, String> map : resultsMap) {
+			SearchResult r = new SearchResult();
+			r.setThumbnailInfo(MyImageInfo.reconstructImageInfoFromQueryResult(map));
+			r.setThumbnail(map.get("imageLink"));
+			result.add(r);
+		}
+		
+		return result;
+	}
+
+	public int put(MyImageInfo uploadImage) {
+		if (database == null || uploadImage == null)
+			return -1;
+		
+		String attributes = SupportFunction.parseToQueryString(MyImageInfo.getAllAttributeNames(), false, false);
+		String values = SupportFunction.parseToQueryString(uploadImage.getAllValues(), true, false);
+		String query = "INSERT INTO " + "`" + IMAGE_TABLE + "`" + attributes + " VALUES " + values + ";";
+		
+		try {
+			return database.putDataImageInfo(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	public MyImageInfo retrieveInfo(String imageId) {
+		if (imageId == null)
+			return null;
+		
+		String query = "SELECT *" 
+			+ " FROM " + "`" + IMAGE_TABLE + "`" 
+				+ " WHERE " + " imageId = " + imageId;
+		try {
+			ArrayList<HashMap<String, String>> results = database.getData(query, DatabaseConnect.RETRIEVE_ALL_ENTITIES);
+			if (results != null && results.size() > 0) {
+				MyImageInfo info = MyImageInfo.reconstructImageInfoFromQueryResult(results.get(0));
+				return info;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void update(MyImageInfo info, String updateColumName, String newValue) {
+		if (info == null)
+			return;
+		
+		String query = "UPDATE `" +  IMAGE_TABLE + "`"
+				+ " SET " + updateColumName + " = '" + newValue + "'"
+					+ " WHERE " + " imageId = " + info.getImageId();
+		database.update(query);
+	}
+	
+	
+}

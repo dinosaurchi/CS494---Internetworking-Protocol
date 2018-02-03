@@ -1,0 +1,238 @@
+Dec 27, 2016
+
+	Network layer: 
+		Includes: 
+			IP protocol
+			Internet routing protocols (including RIP, OSPF, and BGP)
+			ICMP
+
+		router examines header fields in all IP datagrams passing through it
+
+		2 key functions: 
+			Forwarding:
+				move packets from router’s input to appropriate router output
+
+				forwards a packet by examin- ing the value of a field in the arriving packet’s header, and then using this header value to index into the router’s forwarding table
+
+			Routing: 
+				determine route taken by packets from source to dest. 
+
+				The routing algorithm may be centralized (e.g., with an algorithm executing on a central site and down- loading routing information to each of the routers) or decentralized (i.e., with a piece of the distributed routing algorithm running in each router)
+
+			Connection setup:
+				3rd important function (in some network artchitectures)
+					ATM
+					Frame relay, X.25 
+
+	network vs transport layer connection service:
+		network: 
+			between two hosts (may also involve intervening routers in case of VCs)
+		transport: 
+			between two processes
+
+	Network-layer services for Individual datagram:
+		Guaranteed delivery:
+			This service guarantees that the packet will eventually arrive at its destination.
+		Guaranteed delivery with bounded delay:
+			This service not only guarantees deliv- ery of the packet, but delivery within a specified host-to-host delay bound (for example, within 100 msec).
+
+	Network-layer services for flow of datagram:
+		in-order datagram delivery
+		guaranteed minimum bandwidth to flow
+		restrictions on changes in inter-packet spacing
+		security service
+
+	Network-layer service models:
+		Internet : Best effort model 
+			-> Guarantees nothing
+
+		CBR: Constant bit rate, ATM network service
+		ABR: Available bit rate, ATM network service
+
+	datagram network:
+		provides network-layer connectionless service
+	virtual-circuit network:
+		provides network-layer connection service
+
+	=> 
+		service: host-to-host
+		no choice: network provides one or the other
+		implementation: in network core
+
+	Virtual Circuit:
+		Consists of: 
+			path from source to destination
+			VC numbers: 
+				one number for each link along path
+			entries in forwarding tables: 
+				in routers along path
+
+		packet belonging to VC carries VC number (rather than dest address)
+
+		VC number can be changed on each link.
+			new VC number comes from forwarding table
+
+	Datagram networks:
+		no call setup at network layer
+		routers: no state about end-to-end connections
+			no network-level concept of “connection”
+		packets forwarded using destination host address
+
+
+	Internet (Datagram) vs. ATM (VC):
+		Datagram: 
+			Simple inside network
+			Complex at edge
+		VC:
+			complex inside network
+
+	What's inside a router:
+		Input port: 
+			Physcial layer -> Data link layer -> Ethernet (lookup forwarding table for input port)
+
+		Switching fabric: 
+			Transfer from input port to appropriate output port 
+				3 types:
+					Memory, bus, crossbar
+
+		Output port:
+			Ethernet (Datagram (packets) can be lost due to congestion, lack of buffers) -> Link layer -> physical layer
+
+			Tasks:
+				Buffering
+					buffering when arrival rate via switch exceeds output line speed
+
+				Scheduling
+					queueing (delay) and loss due to output port buffer overflow!
+
+			Buffering = RTT * Capacity / sqrt(N flows)
+
+		Internet Protocol has nothing to do with finding the route
+
+	IP addressing:
+		interface: connection between host/router and physical link
+
+		Subnet
+
+		CIDR: Classless InterDomain Routing
+			a.b.c.d/x
+
+		DHCP: 
+			Dynamic Host Configuration Protocol: dynamically get address from as server
+
+			DHCP discover: Host broadcast
+			DHCP offer: Server broadcast
+			DHCP request: Host confirms with server
+			DHCP ACK: Server confirms
+
+			DHCP can return more than just allocated IP address on subnet:
+				- address of first-hop router for client
+				- name and IP address of DNS sever
+				- network mask 
+					+ (indicating network versus host portion of address)	
+
+			DHCP request encapsulated in UDP, encapsulated in IP, encapsulated in 802.I Ethernet
+
+		Hierarchical Addressing allows efficient advertisement of routing information
+
+
+		ISP get block addresses:
+			ICANN: Internet Corporation for Assigned Names and Numbers:
+				allocates addresses
+				manages DNS
+				assigns domain names, resolves disputes
+
+	Network Address Translation (NAT)
+		outgoing datagrams: replace
+		remember (in NAT translation table) 
+		incoming datagrams: replace
+
+	NAT traversal problem:
+		UPnP
+		Relaying
+
+
+	ICMP:
+		used by hosts & routers to communicate network-level information
+
+		network-layer “above” IP:
+			ICMP msgs carried in IP datagrams
+
+		ICMP message: 
+			type, code plus first 8 bytes of IP datagram causing error
+
+			ICMP messages (type 11, code 0)
+			ICMP “port unreachable” message (type 3, code 3)
+
+	IPv6:
+		40 bytes header, 128 bits addresses
+		
+		No fragments
+			IPv6 does not allow for fragmentation and reassem- bly at intermediate routers; these operations can be performed only by the source and destination. If an IPv6 datagram received by a router is too large to be for- warded over the outgoing link, the router simply drops the datagram and sends a “Packet Too Big” ICMP error message (see below) back to the sender.
+		
+		no checksum
+		
+		option moved to outside of the header => 
+
+		Next header field
+		
+		ICMPv6
+
+
+	IPv6 -> IPv4: 
+		IPv4 contains IPv6 as payload if the router does not support IPv6
+			-> Tunneling 
+
+
+
+	Routing algorithm:
+		routing algorithm determines end-end-path through network
+
+		forwarding table determines local forwarding at this router
+
+		Classifications: 
+			- Global or Decentralized
+			- Dynamic or Static
+
+		Link state 
+		Distance vector
+
+		Hierachical routing
+			aggregate routers into regions, “autonomous systems” (AS)
+
+			“intra-AS” routing protocol
+
+			routers in different AS can run different intra-AS routing protocol
+
+
+
+
+
+Chap 5: Link layer
+	
+	Link layer services:
+		framing, link access
+	reliable delivery between adjacent nodes
+	flow control: 
+	error detection
+	error correction
+	half-duplex and full-duplex
+		with half duplex, nodes at both ends of link can transmit, but not at same time
+
+	Link layer is Implemented in:
+		in each and every host
+		link layer implemented in “adaptor” (aka network interface card NIC) or on a chip
+
+	2 types of links:
+		Point to point
+		broadcast
+
+	Multiple access protocols:
+		single shared broadcast channel 
+		two or more simultaneous transmissions by nodes: interference 
+			collision if node receives two or more signals at the same time
+
+				
+
+
+

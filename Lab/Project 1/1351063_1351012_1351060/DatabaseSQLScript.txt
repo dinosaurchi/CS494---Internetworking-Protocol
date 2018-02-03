@@ -1,0 +1,17 @@
+create table User (
+    username VARCHAR(30) PRIMARY KEY, 
+    password VARCHAR(50) NOT NULL );
+
+create table Image ( 
+	imageId INT AUTO_INCREMENT PRIMARY KEY, 
+	imageName VARCHAR(50) NOT NULL, 
+	theme VARCHAR(30) NOT NULL, 
+	type VARCHAR(30) NOT NULL, 
+	height INT(5) NOT NULL, 
+	width INT(5) NOT NULL, 
+	note VARCHAR(50), 
+    imageOwnerUsername VARCHAR(30),
+	FOREIGN KEY (imageOwnerUsername)
+        REFERENCES User(username)
+        ON DELETE CASCADE,
+	imageLink VARCHAR(200) ) 

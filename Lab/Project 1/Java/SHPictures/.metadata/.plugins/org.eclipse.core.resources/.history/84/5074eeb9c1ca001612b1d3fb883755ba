@@ -1,0 +1,55 @@
+package database;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Entity.MyImageInfo;
+import Entity.User;
+import support.SupportFunction;
+
+public class UserDatabase {
+	private DatabaseConnect database = null;
+	private String USER_TABLE = "User";
+	
+	public UserDatabase(DatabaseConnect db) {
+		this.database = db;
+	}
+	
+	public int put(User user) {
+		if (database == null || user == null)
+			return -1;
+		
+		String attributes = SupportFunction.parseToQueryString(User.getAllAttributeNames(), false, false);
+		String values = SupportFunction.parseToQueryString(user.getAllValues(), true, false);
+		String query = "INSERT INTO " + "`" + USER_TABLE + "`" + attributes + " VALUES " + values + ";";
+		
+		try {
+			return database.putData(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	public boolean isExist(String username, String password) {
+		if (username == null || password == null)
+			return false;
+		
+		String query = "SELECT *" 
+			+ " FROM " + "`" + USER_TABLE + "`" 
+				+ " WHERE " + " imageId = " + imageId;
+		try {
+			ArrayList<HashMap<String, String>> results = database.getData(query, DatabaseConnect.RETRIEVE_ALL_ENTITIES);
+			if (results != null && results.size() > 0) {
+				MyImageInfo info = MyImageInfo.reconstructImageInfoFromQueryResult(results.get(0));
+				return info;
+			}
+			return null;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+}

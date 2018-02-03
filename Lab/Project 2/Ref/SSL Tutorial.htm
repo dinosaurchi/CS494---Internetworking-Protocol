@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0077)http://www.cs.miami.edu/home/burt/learning/Csc524.102/notes/ssl-tutorial.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>SSL Tutorial</title>
+<link href="./SSL Tutorial_files/course.css" rel="stylesheet" type="text/css">
+<!--
+<script type="text/javascript" src="myjavascript.js"></script>
+-->
+<style type="text/css"><!--
+   /* internal styles */
+-->
+.messagetype {
+	color: blue ;
+}
+.messagetypealt {
+	color: green ;
+}.messagetypeRed {
+	color: red ;
+}
+</style>
+</head>
+<body>
+ 
+<div id="header">
+<h1>Burt's short SSL tutorial.</h1>
+Burt Rosenberg
+<br>
+Create: 6 April 2010
+<br>
+Last update: 28 March 2011
+</div>
+
+
+<p class="section">
+A really short explanation.
+</p>
+
+<p>
+The client picks a secret, random number and sends it to the server, encrypted using the server's RSA public key. The client and server then communicate using encryption and MAC keys which are derived from this secret.
+
+</p><p class="section">
+Versions:
+</p>
+
+<p>
+The current versions are SSL version 2, SSL version 3 and TLS.
+Use either SSLv3 or TLS. SSLv2 is only supported for backward compatibility. SSLv3 might be more wide-spread. TLS is to replace SSLv3, and toolkits implement both. TLS might be a bit more encumbered by it's bold attitude towards export and patent issues.
+SSLv1 was broken at birth. No sane person would use it.
+
+</p><p class="section">
+Goals:
+</p>
+
+
+<p>
+The SSL goals are:
+</p><ul>
+<li>Confidentiality. The communication should be safe from eavesdropping.
+</li><li>Authentication of the Server. The client should be certain about the
+identity of the server.
+</li><li>Ubiquity, ease of use. There should be no barriers to adoption, neither on the part of the user nor the developer. The user should not have to take
+any particular action compared to non-SSL connections.
+SSL should fit easily into applications designed independently of SSL.
+</li></ul>
+It is also possible to have client authentication, and to omit authentication altogether. 
+
+<p class="section">
+The Basic Protocol:
+</p>
+
+<p>
+The basic protocol consists of a four message handshake sequence, with the client initiating with the first message. After the handshake, data flows
+in records which are protected with the MAC, and encrypted. There are also
+a record type for alerts and errors - out of band data communicated between
+the peer SSL layers.
+
+</p><p>
+Each of the four messages is a compound of various separate messages. 
+I have arranged them by the handshake message type, and given details of
+which each message type includes. 
+</p><ol>
+<li><span class="messagetypeRed">C-&gt;S: </span><span class="messagetypeRed">ClientHello</span>
+   <ul>
+   <li>Client sends an hello containing the following: 
+   </li><li>A proposal for ciphers.
+   </li><li>ClientRandom: 32 bytes of random data
+   </li></ul>
+</li><li><span class="messagetype">S-&gt;C: </span><span class="messagetype">ServerHello:Certificate:ServerHelloDone</span>
+   <ul>
+   <li>Server selects a cipher
+   </li><li>ServerRandom: 32 bytes of random data
+   </li><li>Server must send its X.509 certificate, which is the server public key signed by a root of trust, or by a CA in a chain of CA's to a root of trust. The server might send other
+   certificates in the chain of trust toward a root of trust.
+   </li><li>The ServerHelloDone is needed because the server hello has optional
+   components.
+   </li></ul>
+</li><li><span class="messagetypeRed">C-&gt;S: </span><span class="messagetypeRed">ClientKeyExchange:ChangeCipherSpec:Finished</span>
+   <ul>
+   <li>Client chooses a 48 byte PreMasterSecret, of which 46 bytes are random data, encrypts it by the server's public key found in the X.509 certificate, and sends it to the server as the ClientKeyExchange message.
+   </li><li>A ChangeCipherSpec record, the last unencrypted record.
+   </li><li>A Finished record, encrypted and MAC'ed using the negotiated keys, to authenticate the parameters and seal the handshake with hash values.
+   </li></ul>
+</li><li><span class="messagetype">S-&gt;C: </span><span class="messagetype">ChangeCipherSpec:Finished</span>
+   <ul>
+   <li>Server sends a ChangeCipherSpec as the last unencrypted record it will send.
+   </li><li>Server then sends an encrypted Finished record, encrypted and MAC'ed with the negotiated keys, to authenticate the parameters and seal the handshake with hash values.
+   </li></ul>
+</li></ol>
+
+<p class="section">
+Keys in the basic protocol:
+</p>
+
+<p>
+The client and server both pick 32 bytes of random data and share it with each other, in the clear. The client picks the 48 byte random key for the session, and sends it to the server securely using public-key cryptography. From this pre-master secret and the client and server random data, a cryptographic pseudo-random generator generates a Master Secret, which is further expanded by a PRG to the various needed keys:
+</p><ol>
+<li>Encryption key for client writes,
+</li><li>Encryption key for server writes,
+</li><li>MAC key for client writes,
+</li><li>MAC key for server writes,
+</li><li>IV (Initial Vector) for use by the client,
+</li><li>IV for use by the server.
+</li></ol>
+<p>
+The use of the PRG is to make these six keys "independently random", even though theoretically they are completely dependent.
+
+</p><p class="section">
+Client credentials:
+</p>
+
+<p>
+The server might ask for client credentials. The client cannot push them at the server. If the server requires client credentials, it adds a CertificateRequest message to its ServerHello. In response, the client must send both its certificate and a CertificateVerify message in its ClientKeyExchange message. The CertificateVerify message is the client's RSA signature on a hash of all handshake messages, including the client and server random values.
+
+</p><p>
+</p><ol>
+<li><span class="messagetype">ClientHello</span>
+</li><li><span class="messagetype">ServerHello:Certificate:<span class="messagetypealt">CertificateRequest</span>:ServerHelloDone</span>
+</li><li><span class="messagetype">ClientKeyExchange:<span class="messagetypealt">Certificate:CertificateVerify</span>:ChangeCipherSpec:Finished</span>
+</li><li><span class="messagetype">ChangeCipherSpec:Finished</span>
+</li></ol>
+
+<p class="section">
+Record Protocol: 
+</p>
+
+<p>
+SSL streams are sent by records, which have a record header and a body. The header encodes the type, one of:
+</p><ol>
+<li>Handshake
+</li><li>Change Cipher Spec
+</li><li>Alert
+</li><li>Data
+</li></ol>
+
+<p>
+The Handshake records are generally not encrypted, because the appear before the encryption has been negotiated. Encryption begins with the next record after the Change Cipher Spec record. Alert records provide for continuous access to out of band communication between SSL peers, such as to announce at the SSL layer the intent to end the session, apart from this intent being either inferred form a TCP close, or from something in the application layer protocol.
+
+</p><p>
+We have refered to several of the handshake messages in the text body. Here is the complete list:
+</p><ul>
+<li>HelloRequest
+</li><li>ClientHello
+</li><li>ServerHello
+</li><li>Certificate
+</li><li>ServerKeyExchange
+</li><li>CertificateRequest
+</li><li>ServerHelloDone
+</li><li>CertificateVerify
+</li><li>ClientKeyExchange
+</li><li>Finished
+</li></ul>
+
+
+<p>
+The data type contains a <i>fragment</i> of the application data stream, followed by a MAC on the fragment, then padding and padding length, all encrypted. Before encryption parameters including keys are negotiated, the record body is just content. 
+Each record has a sequence number, that is tracked implicitly, the sequence number is not included explicitly in the data record format. The sequence number is included in the MAC.
+
+
+</p><p class="section">
+Alternative authentications:
+</p>
+
+<p>
+SSLv3 can use ephemeral RSA or DH/DSS as two alternatives to the basic RSA public key cryptography. Both modify the basic protocol by including a ServerKeyExchange message among the ServerHello messages. In ephemeral RSA, the server generates a fresh RSA key, signs it with its "real" RSA key, and sends this key, along with the other messages, in the hello response. The client checks the signature, and then uses the fresh (ephemeral) key rather than the real key to encrypt in its ClientKeyExchange. 
+
+</p><p>
+The motivation is to allow a weaker key for encryption than for signatures, as this is permitted for export to all countries.
+
+</p><p>
+For DH/DSS, the ServerKeyExchange message includes the server's half of the Diffie-Hellman key exchange protocol, with a DSS signature by the server's ceritificate. The client checks the signature, using the sent public key certificate, after checking the signature on the certificate. It then generates a its response to the Diffie-Hellman key xchange and sends it as the ClientKeyExchage. Both sides complete the Diffie-Hellman calculation and use the result as the per-master, continuing as before.
+
+</p><p>
+</p><ol>
+<li><span class="messagetype">ClientHello</span>
+</li><li><span class="messagetype">ServerHello:Certificate:<span class="messagetypealt">ServerKeyExchange</span>:ServerHelloDone</span>
+</li><li><span class="messagetype">ClientKeyExchange:ChangeCipherSpec:Finished</span>
+</li><li><span class="messagetype">ChangeCipherSpec:Finished</span>
+</li></ol>
+
+
+<p class="section">
+More stuff
+</p>
+
+<p>
+Rehandshake: During an ongoing connection, the client can send another ClientHello message. The server can ignore this, or respond by re-initiating the handshake protocol. The server can also renegotiate an hello by sending a HelloRequest, to which the client can respond with the ClientHello, re-initiating the handshake protocol. Neither SSlv3 nor TLS oblige that the client or server agree to renegotiate.
+
+</p><p>
+Session resumption: The ServerHello contains a session identifier. A connection that was closed on a session that continue might be resumed when the ClientHello contains this identifier. The server can respond with this id in its ServerHello. The master secret it retrieved for the session, however the particualar keys, IV's, etc., are renewed as from the fresh client and server random values that were sent in the hello messages.
+
+</p><p>
+Alert message:
+The last record type provides continuous communication between the peer SSL layers. In particular, a session can be closed by messages at this layer. A session closed by TCP FIN's is not the same thing, as the close might not be authentic. A villainous third party could have sent a FIN (or RST) to the port. The application might have some security properties associated with close, and would therefore like to know if the close is authentic.
+
+
+</p><p class="section">
+Bigger picture issues
+</p>
+
+
+
+<p class="section">
+Limitations:
+</p>
+
+<p>
+The largest limitation of SSL is that it authenticates the communication endpoints very early. One symptom of this is that SSL does not play well with virtual hosting for web servers. A typical web server servers multiple web sites. At the time SSL is being setup, the server does not know which site will be requested. The selection of the particular hosted site is part of the HTTP protocol, and that protocol hasn't started yet.
+
+</p><p class="section">
+The PKI:
+</p>
+
+<p>
+The big picture is "client sends random number to server secured by said server's public key". This is self-contained and flawless. Except how does the client get the server's public key? If it does not have it, it can request it from a repository of keys. Actually, to avoid any uncertainty in this step, the server must send its public key in the ServerHello.
+
+</p><p>
+Great. So how do we know the server isn't lying? Because the public key is signed by a root of trust. The signature says: the root of trust believes this document is accurate. The mathematics of the signature means that the client can believe that the root of trust believes this.
+
+
+</p><p>
+Why should we believe the root of trust? The signature on the server's public key is verified using the root of trust's public key. So we must believe, in fact,
+</p><ol>
+<li>
+We have the genuine public key of the root of trust.
+</li><li>
+The corresponding secret key to the root of trust's public key is known by, and uniquely controlled by, the root of trust (no key compromise).
+</li><li>
+The root of trust only signs what it believes.
+</li></ol>
+
+<p>
+This list assumes there are no technical flaws in the system.
+Technical flaws do exist, however. The signature might rely on the MD5 hash, and the MD5 is not secure. Hence the existence of the signature is not actually linked to the root of trust's beliefs. The signature can be produced without the root of trust's involvement, independent of what the root of trust believes.
+
+</p><p>
+In a chain of certificates, where the root of trust T signs an intermediate authority A which then signs a server certificate S, the statement is that T believes that A believes that the document for S is accurate. The question is, does T believe the document for S is accurate? For about 5 years, IE neglected to check this reasoning, and assumed that T would believe whatever A believed. The problem is, A does not need to say only what it believes. It can say other things. It might even lie.
+
+</p><p class="section">
+References
+</p>
+
+<ul>
+<li>SSL and TLS: Designing an Building Secure Systems, Eric Rescorla.
+</li><li>Network security with OpenSSL, John Viega, Matt Messier, Pravir Chandra.
+</li></ul>
+
+<div id="footer">
+Copyright 2010 Burton Rosenberg. All rights reserved
+</div>
+
+
+
+
+
+</body></html>

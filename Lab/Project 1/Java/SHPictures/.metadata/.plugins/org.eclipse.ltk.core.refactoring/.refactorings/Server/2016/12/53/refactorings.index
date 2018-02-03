@@ -1,0 +1,17 @@
+1482642597517	Copy compilation unit
+1482645586623	Move compilation unit
+1482649530812	Move compilation units
+1482649561523	Move compilation units
+1482649569826	Move compilation unit
+1482649578725	Move compilation unit
+1482650363024	Encapsulate field 'imageLink'
+1482651534758	Rename local variable 'criteria'
+1482652621613	Encapsulate field 'image'
+1482652731256	Rename type 'MyImage'
+1482653343233	Rename type 'ImageDatabase'
+1482653377492	Rename method 'retrieve'
+1482656401682	Encapsulate field 'downloadImage'
+1482657036434	Copy package
+1482657046952	Copy package
+1482657055205	Copy package
+1482657146726	Copy compilation unit

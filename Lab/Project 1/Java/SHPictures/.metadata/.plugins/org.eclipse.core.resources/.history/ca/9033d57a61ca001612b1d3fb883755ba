@@ -1,0 +1,24 @@
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DatabaseConnect {
+	private Connection connection;
+	private Statement statement;
+	private ResultSet resultSet;
+	
+	public DatabaseConnect() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql//localhost:9001/test", "root", "");
+			statement = connection.createStatement();
+			
+		} catch (Exception e) {
+			System.out.println("ERROR: " + e);
+			e.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,34 @@
+Chap 1: 
+	
+	Network Edge
+		Hosts (Client, Server)
+	Network Core
+		Interconnected routers
+		network of networks
+
+	frequency division multiplexing: different channels transmitted in different frequency bands
+
+	Access net:
+		homes share access network to cable headend
+		DSL has dedicated line to Central Office
+
+	Ethernet vs Home network
+
+	Wireless Access Network: 
+		802.11b/g (WiFi) - 11, 54 Mbps
+		3G, 4G, LTE (1-10Mbps)
+
+
+Chap 2: 
+
+	HTTP : port 80, TCP
+	FTP : port 21 (control connection) - port 20 (data connection), TCP
+
+	SMTP: port 25, TCP, persistent connection
+
+	The DNS protocol runs over UDP and uses port 53
+
+
+
+
+

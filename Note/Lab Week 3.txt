@@ -1,0 +1,53 @@
+Mon Oct 31, 2016 
+
+	Ip = 172.16.159.1/18 
+
+		Subnet mask : 11111111	11111111	11000000	00000000	
+						255		   255			192			0
+
+					    172		   16           159         1
+
+		AND	op	=>      172	       16			128			0
+	=> Ip network : 172.16.128.0/18
+	Ip start : 172.16.	100000000	. 00000001  /18
+	Ip end	 : 172.16.	111111111	. 11111110  /18
+
+	Divide to 6 subnets:
+
+		172	.	16	.	10000000	.	00000000
+		|				 |
+		|----------------|
+		|	network		 |
+		|	(18 bits)	 |
+		172	.	16	.	10000000	.	00000000   => 128
+		172	.	16	.	10100000	.	00000000   => 160
+		172	.	16	.	10010000	.	00000000   => 144
+		172	.	16	.	10110000	.	00000000   => 176
+		172	.	16	.	10001000	.	00000000   => 136
+		172	.	16	.	10101000	.	00000000   => 152
+		172	.	16	.	10111000	.	00000000   => 168
+
+	We need to borrow 3 bits from the right, because 2 bits is not enough for 5 subnets
+	=> 172.16.128.0/21    (18 + 3 = 21)
+		 Subnet 1: 172.16.136.0/21
+		 Subnet 2: 172.16.144.0/21
+		 ...
+		 Subnet 6: ....
+
+	How to calculate? 
+		=> step = 2^(class - (subnet mask + borrowed bits))
+
+
+	We have :
+		Ip : 172.16.192.0/24
+
+		Divide to 3 subnets: 
+			1st : maintain 25 computers
+			2nd : maintain 20 computers
+			3rd : maintain 10 computers 
+
+			=> We need to calculate the number of bits to maintain 25 computers => can maintain 20 and 10 computers also. In addition, the remaining bits should be able to maintain at least 3 subnets:
+			=> 25 <= 2^m - 2   (2 for 000... and 111...)
+			=> m = 5 
+			=> remaining bits (borrow bits) = 8 - 5 = 3
+			=> Done

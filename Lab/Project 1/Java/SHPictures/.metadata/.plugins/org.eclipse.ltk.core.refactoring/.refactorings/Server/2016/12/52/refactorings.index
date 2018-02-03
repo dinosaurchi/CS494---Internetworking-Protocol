@@ -1,0 +1,17 @@
+1482498193736	Delete element
+1482505499767	Rename method 'getEnterType'
+1482505521847	Rename method 'getEnterInfo'
+1482515039068	Rename method 'getImageInfo'
+1482515063823	Rename method 'getImageId'
+1482515076499	Rename method 'getResponseInfo'
+1482515086324	Rename method 'getQueryAndFilterFromInfo'
+1482516042278	Rename type 'LoginPacket'
+1482518560116	Copy package
+1482583689386	Move compilation unit
+1482583694852	Delete element
+1482583831210	Copy compilation units
+1482584052217	Rename local variable 'enteringMessage'
+1482587084396	Encapsulate field 'content'
+1482587088787	Encapsulate field 'filter'
+1482589075386	Delete element
+1482590777789	Encapsulate field 'image'

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://packetlife.net/blog/2011/jul/5/tcp-slow-start/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>TCP Slow Start - PacketLife.net</title>
+<link href="./TCP Slow Start - PacketLife.net_files/bootstrap.min.css" rel="stylesheet">
+<link href="./TCP Slow Start - PacketLife.net_files/local.css" rel="stylesheet">
+<link rel="icon" type="image/gif" href="http://media.packetlife.net/static/img/favicon.gif">
+
+<link rel="alternate" type="application/rss+xml" title="Latest Blog Posts" href="http://packetlife.net/blog/feed/">
+<script src="./TCP Slow Start - PacketLife.net_files/osd.js"></script><script src="./TCP Slow Start - PacketLife.net_files/expansion_embed.js"></script><script async="" src="./TCP Slow Start - PacketLife.net_files/analytics.js"></script><script async="" type="text/javascript" src="./TCP Slow Start - PacketLife.net_files/gpt.js"></script><script type="text/javascript">
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') + 
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/3265105/PacketLife_Blog_Top_728x90', [728, 90], 'div-gpt-ad-1394245464163-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+<script src="./TCP Slow Start - PacketLife.net_files/pubads_impl_107.js" async=""></script><link rel="prefetch" href="http://tpc.googlesyndication.com/safeframe/1-0-5/html/container.html"></head>
+
+<body>
+<div id="wrap">
+  <div class="container">
+    <a href="http://packetlife.net/"><img src="./TCP Slow Start - PacketLife.net_files/logo.png" alt="PacketLife.net logo" id="site_logo"></a>
+    <ul class="list-inline pull-right outertext" id="usernav">
+      
+        <li>Welcome, Guest!</li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/users/login/">Log in</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/users/register/">Register</a></li>
+      
+    </ul>
+    <div id="page">
+      <div class="header">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="http://packetlife.net/blog/">Blog</a></li>
+                <li><a href="http://packetlife.net/library/cheat-sheets/">Cheat Sheets</a></li>
+                <li><a href="http://packetlife.net/captures/">Captures</a></li>
+                <li><a href="http://packetlife.net/armory/">Armory</a></li>
+                <li><a href="http://packetlife.net/toolbox/">Toolbox</a></li>
+                <li><a href="http://packetlife.net/bookshelf/">Bookshelf</a></li>
+                <li><a href="http://packetlife.net/contact/">Contact Me</a></li>
+              </ul>
+              
+            </div>
+        </nav>
+      </div>
+      <div id="content">
+        
+        
+
+  <!-- PacketLife_Blog_Top_728x90 -->
+  <div id="div-gpt-ad-1394245464163-0" class="banner" data-google-query-id="CLGFyruL5tACFQ4zlgodv5ANcA">
+  <script type="text/javascript">
+  googletag.cmd.push(function() { googletag.display('div-gpt-ad-1394245464163-0'); });
+  </script>
+  <div id="google_ads_iframe_/3265105/PacketLife_Blog_Top_728x90_0__container__" style="border: 0pt none; display: inline-block; width: 728px; height: 90px;"><iframe frameborder="0" src="./TCP Slow Start - PacketLife.net_files/container.html" id="google_ads_iframe_/3265105/PacketLife_Blog_Top_728x90_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="728" height="90" data-is-safeframe="true" style="border: 0px; vertical-align: bottom;"></iframe></div><iframe id="google_ads_iframe_/3265105/PacketLife_Blog_Top_728x90_0__hidden__" title="" name="google_ads_iframe_/3265105/PacketLife_Blog_Top_728x90_0__hidden__" width="0" height="0" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom; visibility: hidden; display: none;" src="./TCP Slow Start - PacketLife.net_files/saved_resource.html"></iframe></div>
+
+
+        
+<div class="row">
+  <div class="col-md-2">
+  
+  </div>
+  <div class="col-md-8">
+  
+
+
+
+
+
+
+<h1 class="page-header">TCP Slow Start</h1>
+<h5 class="text-muted">By <a href="http://packetlife.net/users/stretch/">stretch</a> | Tuesday, July 5, 2011 at 12:00 a.m. UTC</h5>
+<div class="article">
+<div><p>TCP employs four critical congestion control mechanisms in order to function efficiently under constantly changing network conditions such as those found on the global Internet. These mechanisms are defined in <a href="http://tools.ietf.org/html/rfc5681">RFC 5681</a> (and previously in RFCs 2001 and 2581) as slow start, congestion avoidance, fast retransmit, and fast recovery. Today we'll look at how the slow start mechanism is used to increase the initial throughput rate of a TCP connection immediately upon establishment.</p>
+<h2 id="transmission-windows">Transmission Windows</h2>
+<p>Before digging into slow start, it is necessary to understand how TCP places limits, called <em>windows</em>, on the amount of data which can be in transit between two endpoints at a given time. Because of the reliable nature of TCP, a TCP sender can transmit only a limited amount of data before it must receive an acknowledgement from the receiver; this is to ensure that any lost segments can be retransmitted efficiently.</p>
+<p>There are two variables which affect how much unacknowledged data a sender can send: the receiver window (RWND) advertised by the TCP peer and the sender's own congestion window (CWND). As we've covered in <a href="http://packetlife.net/blog/2010/aug/4/tcp-windows-and-window-scaling/">a prior article</a>, the receiver window is the value of the window field in a TCP packet sent by the receiver.</p>
+<p><img src="./TCP Slow Start - PacketLife.net_files/TCP_header.png" alt="TCP_header.png" class="center-block"></p>
+<!--break-->
+
+<p>The sender's congestion window, however, is known only to the sender and does not appear on the wire. The lower of the two window values becomes the maximum amount of unacknowledged data the sender can transmit.</p>
+<p>So how is the CWND determined? <a href="http://tools.ietf.org/html/rfc5681">RFC 5681</a> mandates that the initial CWND value for a connection must be set relative to the sender's maximum segment size (SMSS) for the connection:</p>
+<blockquote>
+<p>If SMSS &gt; 2190 bytes:<br>  IW = 2 * SMSS bytes and MUST NOT be more than 2 segments<br>If (SMSS &gt; 1095 bytes) and (SMSS &lt;= 2190 bytes):<br>  IW = 3 * SMSS bytes and MUST NOT be more than 3 segments<br>If SMSS &lt;= 1095 bytes:<br>  IW = 4 * SMSS bytes and MUST NOT be more than 4 segments</p>
+</blockquote>
+<p>The MSS for either side of a TCP connection is advertised as a TCP option in the SYN packets, and both sides use the lower of the two advertised values. An MSS of 1460 bytes is common on the Internet, being derived from a layer two MTU of 1500 bytes (1500 - 20 bytes for IP - 20 bytes for TCP = 1460). According to RFC 5681, an SMSS of 1460 bytes would give us an initial CWND of 4380 bytes (3 * 1460 = 4380). However, in practice the initial CWND size will vary among TCP/IP stack implementations.</p>
+<p>Again, remember that the sender's effective transmission window is always the lower of CWND and RWND. As we'll see, the slow start (and later, congestion avoidance) mechanisms are used to dynamically increase (and lower) the sender's transmission window throughout the duration of a TCP connection.</p>
+<h2 id="slow-start">Slow Start</h2>
+<p>The slow start algorithm can simplified as this: for every acknowledgment received, increase the CWND by one MSS. For example, if our MSS is 1460 bytes and our initial CWND is twice that (2920 bytes), we can initially send up to two full segments immediately after the connection is established, but then we have to wait for our segments to be acknowledged by the recipient. For each of the two acknowledgments we then receive, we can increase our CWND by one MSS (1460 bytes). So, after we receive two acknowledgments back, our CWND becomes 5840 bytes (2930 + 1460 + 1460). Now we can send up to four full segments before we have to wait for another acknowledgment.</p>
+<p>An illustration may help solidify this concept. <a href="http://media.packetlife.net/media/blog/attachments/612/slow_start.cap">This packet capture</a> shows a 1 MB file being downloaded via HTTP from 174.143.213.184 from the client's perspective. The round-trip time (RTT) between the client and server is about 50 msec. We can produce a graph displaying the progression of the server's CWND over time by opening the capture in Wireshark. Select packet #6 (which contains the first data sent from the server) in the packet list pane and navigate to Statistics &gt; TCP Stream Graph &gt; Time-Sequence Graph (Stevens). You should get a graph that looks like this:</p>
+<p><img src="./TCP Slow Start - PacketLife.net_files/slow_start_graph.png" alt="slow_start_graph.png" class="center-block"></p>
+<p>(If your graph doesn't look like this, go back and make sure you have packet #6 selected.)</p>
+<p>This graph shows the progression of data transfer over time, <em>not speed</em> (the corresponding I/O graph for this capture looks like <a href="http://media.packetlife.net/media/blog/attachments/613/io_graph.png">this</a>, if you're interested). Time (in seconds) is on the x axis and the relative sequence number of each packet is on the y axis. Only packets from the server are shown on this graph. Each dot represents a single packet; clicking on a dot will select the corresponding packet in the list pane (although it's not always easy to click on the exact packet you want). Zoom in on the bottom left corner of the graph by middle-clicking a few times on the origin so that the individual packets become more distinct.</p>
+<p><img src="./TCP Slow Start - PacketLife.net_files/slow_start_graph2.png" alt="slow_start_graph2.png" class="center-block"></p>
+<p>Notice that we see a cluster of packets sent roughly every 50 msec for the first few iterations; this is due to the approximate 50 msec round-trip time between the client and server. At the 0.05s mark, we see the server acknowledging the client's HTTP request (packet #5), followed closely by the first two segments of the response data (packets #6 and #8). At this point the server's CWND is exhausted; it must wait to receive an acknowledgment from the client before it can send any more data.</p>
+<p>After another 50 msec or so, the server receives an acknowledgment from the client for each of the two segments it sent, and increases its CWND to from 2920 bytes (2x MSS) to 5840 bytes (4x MSS). The server sends another four segments at 0.10s and then has to wait for another acknowledgment. At around 0.15s, the server receives four more acknowledgments (one for each segment it sent) and further increases its CWND from 4x MSS to 8x MSS (11680 bytes). Next the server sends eight segments and waits again for more acknowledgments. This pattern repeats again at 0.20s with 16 packets. Notice that the server's CWND has been effectively doubling about every 50 msec.</p>
+<p>At around the 0.25s mark, however, we stop doubling our CWND: the next cluster is of only 26 segments, not 32 as we might expect. Why? Take a look at the packet list in Wireshark's top pane and scroll down to packet #52. Notice that at this point the client starts sending an ACK only for every two (or occasionally three) segments, not for every individual segment. This effectively halves the rate at which we can continue to increase our CWND: remember that we can only add 1460 bytes (one MSS) <em>per acknowledgment received</em>. The following cluster is of 39 segments, which is 1.5 times (instead of twice) our previous cluster of 26.</p>
+<p>Since the rate at which the CWND increases depends on the rate at which the receiver decides to acknowledge segments, slow start doesn't result in a strictly exponential curve. However, we can see from the graph that it does result in a steep gain in throughput over a relatively short period of time. So why is it called "slow start," then? Early implementations of TCP permitted a sender to transmit up to the receiver's full advertised receive window right out of the gate. As you can imagine, this led to substantial loss on slow networks right away, and connections had a hard time getting their throughput rates off the ground. Hence the more relaxed approach of slow start.</p>
+<p>Of course, at some point we're going to bump up against the practical throughput limit of the underlying network. When this happens, we begin to lose segments. When loss is detected, or when we reach a specific CWND threshold, TCP transitions from the slow start algorithm to the congestion avoidance algorithm, which we'll cover in a future article.</p></div>
+</div>
+
+
+
+
+  <div class="well">
+    
+      <div class="pull-right">
+        <a href="http://packetlife.net/users/stretch/"><img src="./TCP Slow Start - PacketLife.net_files/tn_stretch.jpg" class="img-thumbnail"></a>
+      </div>
+    
+    <h3>About the Author</h3>
+    <p>Jeremy Stretch is a network engineer living in the Raleigh-Durham, North Carolina area. He is known for his blog and cheat sheets here at Packet Life. You can reach him by <a href="http://packetlife.net/contact/">email</a> or follow him on <a href="http://twitter.com/packetlife">Twitter</a>.</p>
+  </div>
+
+
+<div class="text-right">
+  <p class="text-muted">Posted in <a href="http://packetlife.net/blog/category/packet-analysis/">Packet Analysis</a></p>
+</div>
+
+<div class="text-center">
+  <a href="https://m.do.co/c/e09ceb441271"><img src="./TCP Slow Start - PacketLife.net_files/ssd-virtual-servers-banner-468x60.jpg" width="468" height="60" class="center-block"></a>
+</div>
+
+
+<a name="comments"></a>
+<h4 class="text-center text-muted">Comments</h4>
+<hr>
+
+  
+
+<a name="c4560"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://packetlife.net/users/tacack/" rel="nofollow"><strong>tacack</strong></a>
+    <br>
+    <small class="text-muted">July 5, 2011 at 4:08 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Great article! Just one question.</p>
+<p>"Notice that at this point the client starts sending an ACK only for every two (or occasionally three) segments, not for every individual segment." </p>
+<p>Why is this happening? Is this a vendor specific implementation or a some kind of Block Acknowledgement feature of TCP?</p>
+<p>Cheers,<br>TacACK</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4561"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Warren Chang</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 5, 2011 at 4:42 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Hi Jeremy,</p>
+<p>Great article, thanks! However I am a bit of confused after digging to the captured file.</p>
+<p>From the file:</p>
+<p>1st cluster (2 segments):<br>Server send #6,8 and client ack #7,9. So next round is 2+2=4 segments.</p>
+<p>2nd cluster (4 segments):<br>Server send #10,12,14,16 and client ack #11,13,15,17. So next is 4+4=8 segments.</p>
+<p>3rd cluster (8 segments):<br>Server send #18,20,22,24,26,28,30,32 and client ack #19,21,23,25,27,29,31,33. So next is 8+8=16 segments.</p>
+<p>Am I correct?</p>
+<p>But in the 4th cluster (16 segments), I found:<br>Server send #34,36,38,40,42,44,46,48,50,51,53,54,56,57,58,60(?) and<br>client ack #35,37,39,41,43,45,47,49,52,55,59. That's 11 Acks.</p>
+<p>Another question:<br> #59 is the ack for #56,57,58, if #60 is the 16th segment server sent, why the server continues sending the next cluster (#61) before receiving the ack of #60?</p>
+<p>Could you please shed me light on this?<br>Thanks a lot!</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4562"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://packetlife.net/users/markosolo/" rel="nofollow"><strong>markosolo</strong></a>
+    <br>
+    <small class="text-muted">July 5, 2011 at 6:27 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>I have just been reading up on RFC 1323 and 2018 - very similar stuff. Might be worth reading this RFC for further info. Thanks Stretch.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4563"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://packetlife.net/users/stuart475898/" rel="nofollow"><strong>stuart475898</strong></a>
+    <br>
+    <small class="text-muted">July 5, 2011 at 8:16 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>tacack,</p>
+<p>Reading through RFCs <a href="http://tools.ietf.org/html/rfc5681#section-4.2">5681(4.2)</a>, and more specifically <a href="http://tools.ietf.org/html/rfc1122#page-96">1122(4.2.3.2)</a>, it appears that an ACK maybe be sent for every few segments to increase network efficiency. Given that the RFC states that 'delayed ACK' as it is known, SHOULD be implemented, some vendors may implement it, and others may not</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4564"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://packetlife.net/users/tacack/" rel="nofollow"><strong>tacack</strong></a>
+    <br>
+    <small class="text-muted">July 5, 2011 at 9:53 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Thanks Stuart! </p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4565"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>kip</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 5, 2011 at 1:35 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Wow I like your article very much. I wish you were my teacher.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4566"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://packetlife.net/users/Xboy_mr/" rel="nofollow"><strong>Xboy_mr</strong></a>
+    <br>
+    <small class="text-muted">July 5, 2011 at 6:00 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>hey, jeremy. how did your job go? was is good and pleased you? i.e. was it what you expected or after you saw your position it just disappointed you !!!!</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4568"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Dan</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 6, 2011 at 1:31 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>I'm sure many of you have already seen it, but for those who haven't, here's a paper from some Google folks regarding a proposed increase to the initial CWND far above the values referenced in RFC 5681: <a href="http://code.google.com/speed/articles/tcp_initcwnd_paper.pdf">http://code.google.com/speed/articles/tcp_initcwnd_paper.pdf</a></p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4569"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Eric</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 6, 2011 at 2:58 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Articles like these ones are the ones I really enjoy.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4574"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Rob</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 7, 2011 at 4:57 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Stretch,</p>
+<p>Thanks a lot.</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4616"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>jsicuran</strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 13, 2011 at 8:04 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Great article.. For anohter great explenation look up the Cisoc Internet Protocol Journals (IPJ) articles titled "TCP Performance". There were publised in 2000 and were 2 segemnts. Execllent breakdown on how TCP works and it congestion handling mechanisims..  The Cisco site has an archive of all past IPJs and they are a great resource.</p>
+<p>Regards...</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4750"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>albert</strong> (guest)
+      
+    <br>
+    <small class="text-muted">August 22, 2011 at 6:16 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Hi, Jeremy,</p>
+<p>Thanks for the great detailed posting, I've learnt a lot from that and when I dig into the more detail, I found something that I would like to share:</p>
+<p>seems the RTT is not 50ms, but rather short, as can be seem from TCP RTT graph, which is ~0.00002s</p>
+<p>Seems the 50ms wait is the mechanism in server scheduling. </p>
+<p>and also the traffic is from server to client, the congestion control side should be server.</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c4958"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>dlau</strong> (guest)
+      
+    <br>
+    <small class="text-muted">October 30, 2011 at 8:07 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Nice article, this is really helping me with realizing slow start within a time/seq graph.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c5375"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>kevin</strong> (guest)
+      
+    <br>
+    <small class="text-muted">May 1, 2012 at 6:26 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Hi albert,</p>
+<p>The 50 ms RTT also puzzled me.  Looking at the trace, the receiver sent ACK right after with 0.0002s delay (rather than 50ms) on packets #7 and #9.</p>
+<p>Can someone elaborate on the server scheduling mechanism?  Is it the amount of time the operating system took on the context switch between threads/process?</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c5896"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Rob</strong> (guest)
+      
+    <br>
+    <small class="text-muted">December 13, 2012 at 5:59 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Kevin,<br>the capture is from the user's standpoint, so all ACKs will be immediate.  What you need to see is the first 2 packets #6 and #8 were sent from the server at the same time, then there is a ~50ms wait (the time the server waits to hear back from the user's 1st ACK plus the time for the user to receive the next set of data) before the server sends the next 4 packets, #10,#12,#14,#16.  Then another RTT of ~50 ms before the next 8 packets (#18,#20,#22,#24,#26,#28,#30,#32) arrive at the user.  The # of packets the server can send increases with every ACK, so as ACKs trickle in to the server and new packets are sent, the RTT loses its significance.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c6040"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      <a href="http://ithitman.blogspot.com/">
+      <strong>ithitman</strong> (guest)
+      </a>
+    <br>
+    <small class="text-muted">February 18, 2013 at 6:52 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>@tacack </p>
+<p>You are correct about the 'delayed ACK'. It is a mechanism that can be implemented to improve network efficiency by only acknowledging every second packet. An ACK may be delayed up to 500ms, however an ACK must be sent for every 2nd segment received. Now this creates a funky problem known as "Silly Window Syndrome" when the NAGLE algorithm is turned on one side and delayed ACK is turned on the other side. </p>
+<p>NAGLE algorithm does increase network efficiency by waiting to send till it has enough data to fill the packet (MSS) but this comes with the cost of latency. </p>
+<p>Great article stretch!!<br></p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c6200"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Siddharth Padmanabhan</strong> (guest)
+      
+    <br>
+    <small class="text-muted">April 9, 2013 at 8:53 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Hi Jeremy,</p>
+<p>Thanks for the good write up.<br>I am working on a side project that involves finding server characteristics such as icw, ssthresh etc. I have written the code in python. So far, I have got a rough estimate of icw of a web server, but having a bit of difficulty for finding the ssthresh. <br>Would you have any idea on going about that?</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c6851"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Manuel</strong> (guest)
+      
+    <br>
+    <small class="text-muted">March 29, 2014 at 1:14 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>I bet many of us are expecting the congestion avoidance algorithm article. Jeremy knowledge in this matter is outstanding.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c6984"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Jaume</strong> (guest)
+      
+    <br>
+    <small class="text-muted">May 19, 2014 at 8:30 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>Thanks for the crystal clear explanation of slow start. I was looking for some material to prepare my classes. I think that the plots help a lot in understanding what is going on.</p>
+<p>I am trying to prepare some lecture notes for the students:
+<a href="https://github.com/jbarcelo/QOS-lecture-notes">https://github.com/jbarcelo/QOS-lecture-notes</a></p>
+<p>BTW, I love the "challenge" questions for posting comments.</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c7540"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>John</strong> (guest)
+      
+    <br>
+    <small class="text-muted">January 30, 2015 at 4:16 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <p>Stretch - great article as always.  I think I spot an error though.  Above you say "The MSS for either side of a TCP connection is advertised as a TCP option in the SYN packets, and both sides use the lower of the two advertised values."  I believe that is wrong.  The advertised MSS do not have to be identical - there is no "negotiation", and whatever values are used are used as is.  So, one peer could have MSS = 1100 and the other MSS = 1200 and they would just use those verbatim.</p>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c7804"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Ebin </strong> (guest)
+      
+    <br>
+    <small class="text-muted">July 18, 2015 at 1:43 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>"The MSS for either side of a TCP connection is advertised as a TCP option in the SYN packets, and both sides use the lower of the two advertised values."</p>
+<p>Is this correct ? Cant either side talk using different MSS values ?</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c7926"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>vvk</strong> (guest)
+      
+    <br>
+    <small class="text-muted">October 27, 2015 at 2:27 a.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>@Ebin,</p>
+<p>No, that defeats the purpose of connection establishment and windowing which are the reasons TCP exists in the first place.</p></div>
+    
+    <hr>
+  </div>
+</div>
+
+
+
+  
+
+<a name="c8135"></a>
+<div class="row">
+  <div class="col-md-4 text-right">
+    
+      
+      <strong>Alex</strong> (guest)
+      
+    <br>
+    <small class="text-muted">March 9, 2016 at 3:27 p.m. UTC</small>
+  </div>
+  <div class="col-md-8">
+    <div><p>@vbk, @Ebin</p>
+<p>from RFC 879</p>
+<hr>
+<p>This Maximum Segment Size (MSS)
+   announcement (often mistakenly called a negotiation) is sent from the
+   data receiver to the data sender and says "I can accept TCP segments
+   up to size X". The size (X) may be larger or smaller than the
+   default.  The MSS can be used completely independently in each
+   direction of data flow.</p>
+<hr>
+<p>Has this statement been superseeded/replaced by other RFCs? If not still the MSS value can be different in the two directions</p></div>
+    
+    
+  </div>
+</div>
+
+
+
+
+
+
+    <div class="alert alert-info">Comments have closed for this article due to its age.</div>
+
+
+
+  </div>
+  <div class="col-md-2">
+  
+  </div>
+</div>
+
+      </div>
+    </div>
+    <div class="text-center">
+      <ul class="list-inline outertext" id="footernav">
+        <li><a href="http://packetlife.net/">Home</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/blog/">Blog</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/library/cheat-sheets/">Cheat Sheets</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/captures/">Captures</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/armory/">Armory</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/toolbox/">Toolbox</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/bookshelf/">Bookshelf</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/contact/">Contact Me</a></li>
+        <li>|</li>
+        <li><a href="http://packetlife.net/about/">About</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="footer">
+  <div class="container text-center small">
+    <strong>More cool stuff</strong>
+    <ul class="list-inline">
+      <li><a href="http://networking-forum.com/">networking-forum.com</a></li>
+      <li>|</li>
+      <li><a href="http://www.reddit.com/r/networking/">r/Networking</a></li>
+      <li>|</li>
+      <li><a href="http://inetpro.org/wiki/">Internetworkpro</a></li>
+      <li>|</li>
+      <li><a href="http://firewall.cx/">firewall.cx</a></li>
+      <li>|</li>
+      <li><a href="http://networkengineering.stackexchange.com/">Network Engineering @ StackExchange</a></li>
+    </ul>
+  </div>
+</div>
+<script src="./TCP Slow Start - PacketLife.net_files/jquery.min.js"></script>
+<script src="./TCP Slow Start - PacketLife.net_files/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-3943290-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<iframe id="google_osd_static_frame_8700338129835" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./TCP Slow Start - PacketLife.net_files/saved_resource(1).html"></iframe></body></html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)http://dyn.com/blog/dns-why-its-important-how-it-works/ -->
+<html class="uk-notouch"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/aquant.js" async="" type="text/javascript"></script><script async="" id="db_ip_api" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/ip.json"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/munchkin.js"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/BizibleAcct.js"></script><script type="text/javascript" id="veConnect" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/capture-apps-4.18.1.js"></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/cb=gapi.loaded_1" async=""></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/cb=gapi.loaded_0" async=""></script><script async="" id="demandbase_js_lib" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/4yYUFLVN.min.js"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/plusone.js" gapi_processed="true"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/analytics.js"></script><script type="text/javascript" async="" src="http://a.adroll.com/j/roundtrip.js"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/conversion_async.js"></script><script async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/gtm.js"></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/all.js" id="fbjssdk"></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/widgets.js" id="tweetjs"></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/in.js" id="linkedin"></script><script type="text/javascript" async="" src="http://cdn.mplxtms.com/s/MasterTMS.min.js#1459"></script><script type="text/javascript" defer="" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/evergage.min.js"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/ip(1).json"></script>
+	<!-- Optimizely Syncronous Script -->
+	<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/2573310155.js"></script><iframe src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/a2573310155.html"></iframe>
+
+	<!-- Evergage Syncronous Script -->
+	<script type="text/javascript">
+	  var _aaq = window._aaq || (window._aaq = []);
+	  var evergageAccount = 'dyn';
+	  // var dataset = 'dyn_end2end_development'; // Use in Development
+	  // var dataset = 'dyn_end2end_staging'; // Use in Staging
+	  var dataset = 'dyn_end2end_production'; // Use in Production (No tests should hit this)
+	  _aaq.push(['setEvergageAccount', evergageAccount], ['setDataset', dataset], ['setUseSiteConfig', true], ['setUser', window.fingerprintId], ['setCompany', 'DynCustomer']);
+	
+	  (function(){
+	    var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+	        g.type = 'text/javascript'; g.defer = true; g.async = true;
+	        g.src = document.location.protocol + '//cdn.evergage.com/beacon/'
+	                + evergageAccount + '/' + dataset + '/scripts/evergage.min.js';
+	        s.parentNode.insertBefore(g, s);
+	  })();
+	</script>
+
+
+<script type="text/javascript">/*DO NOT ALTER *** Dyn*/(function(e){var t="1459",n=document,r,i,s={http:"http://cdn.mplxtms.com/s/MasterTMS.min.js",https:"https://secure-cdn.mplxtms.com/s/MasterTMS.min.js"},o=s[/\w+/.exec(window.location.protocol)[0]];i=n.createElement("script"),i.type="text/javascript",i.async=!0,i.src=o+"#"+t,r=n.getElementsByTagName("script")[0],r.parentNode.insertBefore(i,r),i.readyState?i.onreadystatechange=function(){if(i.readyState==="loaded"||i.readyState==="complete")i.onreadystatechange=null}:i.onload=function(){try{e()}catch(t){}}})(function(){});</script>
+
+
+<title>What is DNS? Why It's Important &amp; Why We Need It</title>
+
+<meta name="viewport" content="width=device-width">
+<meta property="og:url" content="http://dyn.com/blog/dns-why-its-important-how-it-works/">
+	<meta name="description" content="If you find yourself wondering, " what="" is="" dns"="" then="" read="" this="" article="" and="" get="" a="" better="" understanding="" of="" dns="" why="" it="" important="" for="" your="" website."="">
+	<meta property="og:description" content="If you find yourself wondering, " what="" is="" dns"="" then="" read="" this="" article="" and="" get="" a="" better="" understanding="" of="" dns="" why="" it="" important="" for="" your="" website."="">
+	<meta property="og:image" content="/wp-content/themes/dynamic/images/dyn-orb-share.png">
+
+<link rel="shortcut icon" href="http://dyn.com/wp-content/themes/dynamic/images/favicon.png" type="image/png">
+<link rel="alternate" type="application/rss+xml" title="Dyn Blog" href="http://feeds.feedburner.com/dyn-blog">
+<link rel="pingback" href="http://dyn.com/xmlrpc.php">
+<link rel="stylesheet" href="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/dyn-uikit.css" type="text/css" media="screen">
+<link rel="stylesheet" href="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/style.css" type="text/css" media="screen">
+
+<meta name="google-site-verification" content="RnW8A1Yl8ouWjTDPZVEhghPmNEkYBa_aYNMg6q6kSzs">
+
+<script>/*
+ * jQuery Reveal Plugin 1.0
+ * www.ZURB.com
+ * Copyright 2010, ZURB
+ * Free to use under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * === Modified by Ben Anderson, banderson@dyn.com ===
+*/
+(function(e){e("a[data-reveal-id]").live("click",function(t){t.preventDefault(),t=e(this).attr("data-reveal-id"),e("#"+t).reveal(e(this).data())}),e.fn.reveal=function(t){return t=e.extend({},{animationSpeed:200,closeOnBackgroundClick:!0,dismissModalClass:"close-reveal-modal",onshow:function(){},onhide:function(){}},t),this.each(function(){var n=e(this),r=parseInt(n.css("top"));n.height();var i=!1,s=e(".reveal-modal-bg");0==s.length&&(s=e('<div class="reveal-modal-bg" />').insertAfter(n)),n.bind("reveal:open",function(){s.unbind("click.modalEvent"),e("."+t.dismissModalClass).unbind("click.modalEvent"),i||(i=!0,n.css({opacity:0,visibility:"visible",top:e(document).scrollTop()+r}),s.css({opacity:0}).show().animate({opacity:.7},t.animationSpeed/2),n.delay(t.animationSpeed/2).animate({opacity:1},t.animationSpeed,function(){i=!1,t.onshow.call(this)})),n.unbind("reveal:open")}),n.bind("reveal:close",function(){i||(i=!0,s.delay(t.animationSpeed).fadeOut(t.animationSpeed),n.animate({opacity:0},t.animationSpeed,function(){n.css({opacity:1,visibility:"hidden",top:r}),i=!1,t.onhide.call(this)})),n.unbind("reveal:close")}),n.trigger("reveal:open"),e("."+t.dismissModalClass).bind("click.modalEvent",function(){n.trigger("reveal:close")}),t.closeOnBackgroundClick&&(s.css({cursor:"pointer"}),s.bind("click.modalEvent",function(){n.trigger("reveal:close")})),e("body").keyup(function(e){27===e.which&&n.trigger("reveal:close")})})}})(jQuery);if("undefined"==typeof runAfterMainJS)var runAfterMainJS=[];$(function(){var e=function(e){"placeholder"in document.createElement("input")||($(e).val($(e).attr("placeholder")),$(e).focus(function(){$(this).val()===$(this).attr("placeholder")&&$(this).val("")}),$(e).blur(function(){$(this).val().length||$(this).val($(this).attr("placeholder"))}))};e("#s"),e("#sdomain"),e("#snewsletter"),$(function(){}),$('a[href$="/support/wizard/"]').attr("href","/support/wizard-js/");for(var t in runAfterMainJS)runAfterMainJS[t]()})</script><script>//Disables top level menu links
+$(document).ready(function() {
+    $('.disabled a[href="#"]').click(function(e) {
+        e.preventDefault();
+    });
+});</script><iframe src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/2573310155.html"></iframe><script type="text/javascript" charset="utf-8" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/button.4e56ff84e57afaf5af2506ef73ab8a88.js"></script><script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/secureAnonymousFramework"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/munchkin(1).js"></script><script type="text/javascript" async="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/tag.js"></script><style type="text/css" class="evergageCampaignStyles">/*
+ * Copyright (C) 2010-2014 Evergage, Inc.
+ * All rights reserved.
+ */
+
+
+/* Fluid class for determining actual width in IE */
+#qtip-rcontainer .evergage-tooltip{
+    display: block !important;
+    visibility: hidden !important;
+    position: static !important;
+    float: left !important;
+}
+
+/* Core qTip styles */
+.evergage-tooltip, .evergage-qtip{
+    position: fixed;
+    left: -28000px;
+    top: -28000px;
+    display: none;
+}
+
+.evergage-tooltip.evergage-unsafe-tooltip {
+    display: block;
+    left: inherit;
+    top: inherit;
+}
+
+.evergage-tooltip.evergageMessageInVisualEditorTestMode {
+    position: absolute;
+    pointer-events: auto;
+}
+
+.evergage-tooltip > .evergage-tooltip-content-unsafe-tooltip {
+    margin: 0px !important;
+    border: none !important;
+    outline: 0px !important;
+    padding: 0px !important;
+}
+
+.evergage-tooltip.evergage-jgrowl.evergage-tooltip-bar {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+}
+
+.evergage-tooltip-invisible {
+    display: none !important;
+    visibility: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+}
+
+.evergage-tooltip-page {
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: inherit !important;
+    display: inline-block;
+}
+
+.evergage-tooltip-page-replace {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.evergage-tooltip .evergage-tooltip-content li.evergage-tasklistitem-notdone, .evergage-tooltip .evergage-tooltip-content li.evergage-tasklistitem-done {
+    text-transform: inherit;
+    display: list-item;
+    width: inherit;
+    line-height: inherit;
+    text-align: left;
+    margin-bottom: 10px;
+    list-style-position: inside;
+}
+
+.evergage-tooltip li.evergage-task-done, .evergage-tooltip li.evergage-task-notdone {
+    margin-bottom: 10px;
+}
+
+.evergage-tooltip .evergage-tooltip-content li.evergage-tasklistitem-done, .evergage-tooltip li.evergage-task-done {
+    text-decoration: line-through;
+}
+
+.evergage-tooltip.evergage-nonBlocking.evergage-tooltip-hover {
+    opacity: 0.2 !important;
+}
+
+.evergage-tooltip .evergage-tooltip-content{
+    position: relative;
+    padding: 5px 9px;
+    overflow: hidden;
+
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.evergage-tooltip .evergage-tooltip-titlebar{
+    position: relative;
+    min-height: 14px;
+    padding: 5px 35px 5px 10px;
+    overflow: hidden;
+
+    border-width: 0 0 1px;
+    font-weight: bold;
+}
+
+.evergage-tooltip-titlebar + .evergage-tooltip-content{ border-top-width: 0 !important; }
+
+/* Default close button class */
+.evergage-tooltip-titlebar .evergage-tooltip-close {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    margin-top: -9px;
+    font-weight: bold;
+
+    cursor: pointer;
+    outline: medium none;
+
+    border: none;
+    background: transparent;
+    /*border-width: 1px;*/
+    /*border-style: solid;*/
+}
+
+.emptyTitle > .evergage-tooltip-titlebar  {
+    height: 0;
+    float: right;
+    z-index: 2147483647;
+}
+
+* html .evergage-tooltip .evergage-tooltip-titlebar .evergage-tooltip-close { top: 16px; } /* IE fix */
+
+.evergage-tooltip-titlebar .evergage-ui-icon-close,
+.evergage-tooltip-icon .evergage-ui-icon-close {
+    display: block;
+    text-indent: -1000em;
+    direction: ltr;
+}
+
+.evergage-tooltip-icon, .evergage-tooltip-icon .evergage-ui-icon-close {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.evergage-tooltip-icon .evergage-ui-icon-close{
+    width: 18px;
+    height: 14px;
+
+    text-align: center;
+    text-indent: 0;
+    font: normal bold 14px/14px sans-serif;
+
+    color: inherit;
+    background: transparent none no-repeat -100em -100em;
+}
+
+a.evergage-tooltip-close:hover {
+    text-decoration: none;
+}
+
+.evergage-ui-icon-close:hover {
+    font-size: 22px;
+}
+
+
+/* Applied to 'focused' tooltips e.g. most recently displayed/interacted with */
+.evergage-tooltip-focus {}
+
+/* Applied on hover of tooltips i.e. added/removed on mouseenter/mouseleave respectively */
+.evergage-tooltip-hover {}
+
+/* Default tooltip style */
+.evergage-tooltip-default {
+    /*border-width: 2px;
+    border-style: solid;
+    border-color: #F1D031;
+
+    background-color: #FFFFA3;
+    color: #555;*/
+}
+
+.evergage-tooltip-default .evergage-tooltip-titlebar {
+    background-color: transparent;
+}
+
+.evergage-tooltip-default .evergage-tooltip-icon {
+    /*border-color: #CCC;*/
+    /*background: #F1F1F1;*/
+    /*color: #777;*/
+}
+
+/* Add shadows to your tooltips in: FF3+, Chrome 2+, Opera 10.6+, IE9+, Safari 2+ */
+.evergage-tooltip-shadow{
+    -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Add rounded corners to your tooltips in: FF3+, Chrome 2+, Opera 10.6+, IE9+, Safari 2+ */
+.evergage-tooltip-rounded,
+.evergage-tooltip-tipsy,
+.evergage-tooltip-bootstrap{
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+
+/* IE9 fix - removes all filters */
+.evergage-tooltip:not(.ie9haxors) div.evergage-tooltip-content,
+.evergage-tooltip:not(.ie9haxors) div.evergage-tooltip-titlebar{
+    filter: none;
+    -ms-filter: none;
+}
+
+
+/* Tips plugin */
+.evergage-tooltip .evergage-tooltip-tip{
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.evergage-tooltip .evergage-tooltip-tip,
+.evergage-tooltip .evergage-tooltip-tip .evergage-qtip-vml{
+    position: absolute;
+
+    line-height: 0.1px !important;
+    font-size: 0.1px !important;
+    color: #123456;
+
+    background: transparent;
+    border: 0 dashed transparent;
+}
+
+.evergage-tooltip .evergage-tooltip-tip canvas{ top: 0; left: 0; }
+
+.evergage-tooltip .evergage-tooltip-tip .evergage-qtip-vml{
+    behavior: url(#default#VML);
+    display: inline-block;
+    visibility: visible;
+}
+
+/* Modal plugin */
+#evergage-qtip-overlay{
+    position: fixed;
+    left: -10000em;
+    top: -10000em;
+}
+
+/* Applied to modals with show.modal.blur set to true */
+#evergage-qtip-overlay.blurs{ cursor: pointer; }
+
+/* Change opacity of overlay here */
+#evergage-qtip-overlay div{
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+
+    background-color: black;
+
+    opacity: 0.7;
+    filter:alpha(opacity=70);
+    -ms-filter:\"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)\";
+}
+
+.evergage.poweredByEvergage > a {
+    opacity: 0.2;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    right: 4px;
+    bottom: 2px;
+}
+
+.evergage.poweredByEvergage > a:hover {
+    opacity: 1;
+}
+
+#evergage-qtip-overlay div{
+    opacity:.25
+}
+
+/*# sourceURL=evergageStyles.css*/</style><style type="text/css">* html #li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link{height:1% !important;}#li_ui_li_gen_1477386667890_0{position:relative !important;overflow:visible !important;display:block !important;}#li_ui_li_gen_1477386667890_0 span{-webkit-box-sizing:content-box !important;-moz-box-sizing:content-box !important;box-sizing:content-box !important;}#li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link{border:0 !important;height:20px !important;text-decoration:none !important;padding:0 !important;margin:0 !important;display:inline-block !important;}#li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link:link, #li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link:visited, #li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link:hover, #li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link:active{border:0 !important;text-decoration:none !important;}#li_ui_li_gen_1477386667890_0 a#li_ui_li_gen_1477386667890_0-link:after{content:"." !important;display:block !important;clear:both !important;visibility:hidden !important;line-height:0 !important;height:0 !important;}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-logo{background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-position:-56px -423px !important;background-repeat:no-repeat !important;background-color:#0077b5 !important;background-size:135px auto !important;cursor:pointer !important;border:0 !important;border-right:1px solid #066094 !important;text-indent:-9999em !important;overflow:hidden !important;padding:0 !important;margin:0 !important;position:absolute !important;left:0px !important;top:0px !important;display:block !important;width:20px !important;height:20px !important;float:right !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title{color:#fff !important;cursor:pointer !important;display:block !important;white-space:nowrap !important;float:left !important;margin-left:1px !important;vertical-align:top !important;overflow:hidden !important;text-align:center !important;height:18px !important;padding:0 4px 0 23px !important;border:1px solid #000 !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;text-shadow:0 -1px #005887 !important;line-height:20px !important;border-radius:2px !important;-webkit-border-radius:2px !important;border-top-right-radius:2px !important;border-bottom-right-radius:2px !important;-webkit-border-top-right-radius:2px !important;-webkit-border-bottom-right-radius:2px !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}#li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title{border:1px solid #000 !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}#li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title, #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title{color:#fff !important;border:1px solid #000 !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.IN-shadowed #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title{}.IN-shadowed #li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title{}.IN-shadowed #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title, .IN-shadowed #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title{}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text, #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;font-size:11px !important;font-family:Arial, sans-serif !important;font-weight:bold !important;font-style:normal !important;-webkit-font-smoothing:antialiased !important;display:inline-block !important;background:transparent none !important;vertical-align:top !important;height:18px !important;line-height:20px !important;float:none !important;}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text strong{font-weight:bold !important;}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text em{font-style:italic !important;}#li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title-text, #li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;}#li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title-text, #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title-text, #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title-text *, #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;}#li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title #li_ui_li_gen_1477386667890_0-mark{display:inline-block !important;width:0px !important;overflow:hidden !important;}.success #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title{color:#fff !important;border-top-color:#0077b5 !important;border-right-color:#0077b5 !important;border-bottom-color:#0077b5 !important;border-left-color:#0077b5 !important;background-color:#0077b5 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077b5), color-stop(100%,#0077b5)) !important; background-image: -webkit-linear-gradient(top, #0077b5 0%, #0077b5 100%) !important;}.success #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text, .success #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1477386667890_0 #li_ui_li_gen_1477386667890_0-title{}.success #li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title{color:#fff !important;border-top-color:#0369a0 !important;border-right-color:#0369a0 !important;border-bottom-color:#0369a0 !important;border-left-color:#0369a0 !important;background-color:#0369a0 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0369a0), color-stop(100%,#0369a0)) !important; background-image: -webkit-linear-gradient(top, #0369a0 0%, #0369a0 100%) !important;}.success #li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title-text, .success #li_ui_li_gen_1477386667890_0.hovered #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;}.success #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title, .success #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title{color:#fff !important;border-top-color:#066094 !important;border-right-color:#066094 !important;border-bottom-color:#066094 !important;border-left-color:#066094 !important;background-color:#066094 !important;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#066094), color-stop(100%,#066094)) !important; background-image: -webkit-linear-gradient(top, #066094 0%, #066094 100%) !important;}.success #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title-text, .success #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title-text, .success #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title-text *, .success #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title-text *{color:#fff !important;}.IN-shadowed .success #li_ui_li_gen_1477386667890_0.clicked #li_ui_li_gen_1477386667890_0-title, .IN-shadowed .success #li_ui_li_gen_1477386667890_0.down #li_ui_li_gen_1477386667890_0-title{}#li_ui_li_gen_1477386667899_1-container.IN-top {display:inline-block !important;overflow:visible !important;position:relative !important;height:42px !important;line-height:1px !important;cursor:pointer !important;}#li_ui_li_gen_1477386667899_1.IN-top {display:inline-block !important;height:42px !important;width:60px !important;text-align:center !important;background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:-207px -470px !important;}#li_ui_li_gen_1477386667899_1-content.IN-top {display:inline !important;font-size:16px !important;color:#4e4e4e !important;font-weight:bold !important;font-family:Arial, sans-serif !important;line-height:38px !important;}#li_ui_li_gen_1477386667899_1-container.IN-empty #li_ui_li_gen_1477386667899_1-inner.IN-top {background-image:url(https://static.licdn.com/scds/common/u/images/apps/connect/sprites/sprite_connect_v14.png) !important;background-color:transparent !important;background-repeat:no-repeat !important;background-position:0px -393px !important;background-size:135px auto !important;overflow:hidden !important;margin:4px auto 0 auto !important;width:27px !important;height:28px !important;display:block !important;}#li_ui_li_gen_1477386667899_1-container.IN-empty #li_ui_li_gen_1477386667899_1-content.IN-top {text-indent:-999px !important;display:inline-block !important;}#li_ui_li_gen_1477386667899_1-container.IN-hidden #li_ui_li_gen_1477386667899_1 {display:none !important;}</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head>
+<body class="single single-post postid-12524 single-format-standard" aria-describedby="evergage-tooltip-amb2a8Ha" style="margin-top: 60px;">
+
+<style>.hubs-embedded #collection-items .tile{ margin:0 40px 40px 0 !important;}
+.product .uk-modal-dialog{background:#f1f1f1}
+.chatty img{border-radius: 0 3px 3px 0;position:absolute;left:0}
+#sidenav{margin-right:0px}
+#nav-promo{display:none}
+.count-top {width: 245px;}
+.uk-margin-medium{
+margin-top:20px;
+margin-bottom:20px !important;
+}</style>
+	<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/bowser.min_.js"></script>
+<div data-uk-alert="" style="border-color: #ffdcdc; background: #fff1f1;margin:0;display:none" id="unsupported-browser" class="uk-alert uk-alert-danger">
+	<a class="uk-alert-close uk-close" style="color: #ff5050;" href="http://dyn.com/blog/dns-why-its-important-how-it-works/">
+	</a>
+	It looks like you’re using an older browser. Please update your browser if you intend to make a purchase or login to your account.
+	<a href="http://dyn.com/browser-support/">
+		See our list of supported browsers.
+	</a>
+</div>
+<script>
+var supported_browsers = {
+  chrome: "22",
+  firefox: "27",
+  msie: "11",
+  safari: "9",
+  ios: "5",
+  android: "5"
+};
+function pollForjQuery () {
+  if (window.jQuery) {
+    $('#unsupported-browser').toggle(bowser.isUnsupportedBrowser(supported_browsers));
+  } else {
+    // checks for jQuery again in 50ms
+    setTimeout(pollForjQuery, 50);
+  }
+}
+pollForjQuery();
+</script>
+<nav id="top-nav" class="uk-navbar">
+		<div id="top-nav-inner" class="uk-container uk-container-center">
+			<!--START LOGO -->
+			<div class="header-logo uk-width-small-1-1 uk-width-medium-1-1 uk-width-large-1-6">
+				<a href="http://dyn.com/" id="white-logo" class="uk-float-left">Dyn - Internet Performance</a><a href="http://dyn.com/blog/dns-why-its-important-how-it-works/#off-canvas-mobile-nav" class="icon-menu uk-navbar-toggle uk-hidden-large uk-float-right" data-uk-offcanvas=""></a>
+			</div>
+
+			<!-- START LEFT DROPDOWN NAV -->
+			<ul class="uk-navbar-nav uk-visible-large">
+				<!-- Start Products-->
+				<li id="product-nav" class="uk-parent" data-uk-dropdown="{justify:&#39;#top-nav&#39;,hoverDelayIdle:&#39;0&#39;}"><a href="http://dyn.com/products/">Products</a>
+				<div class="uk-dropdown uk-dropdown-navbar">
+	<div style="width:1200px" class="uk-container uk-container-center">
+		<div class="uk-grid uk-dropdown-grid uk-margin-top uk-margin-bottom">
+			<div class="uk-width-7-10">
+	<div style="border: 1px solid #d7d7d7; background: #fff; overflow: hidden; padding: 25px 25px 0px;" class="uk-panel uk-panel-box">
+  <div style="padding: 15px 25px; border-radius: 0px; margin: -26px -26px 15px;" class="uk-alert uk-margin-bottom">
+  <p style="font-size:20px;line-height:26px" class="uk-h4 uk-margin-remove">Internet Performance Management (IPM)</p>
+						<p class="uk-margin-small-top"><span class="uk-margin-bottom-remove uk-h6">The Platform:</span> Mission control for all things Internet performance <a href="http://dyn.com/platform/" class="uk-float-right uk-button uk-button-small uk-button-primary" style="margin-top: -22px;">Explore Platform</a></p>
+					</div>
+					<div class="uk-grid uk-grid-divider uk-margin-bottom uk-margin-top">
+						<div class="uk-width-1-3">
+							<p class="uk-h6 uk-margin-small-top"><a href="http://dyn.com/traffic-management/">DNS &amp; Traffic Steering</a></p>
+							<ul class="uk-nav uk-nav-dropdown">
+							<li><a href="http://dyn.com/dns-for-ipm/">DNS for Internet Performance Management</a></li>
+							<li><a href="http://dyn.com/active-failover/">Active Failover</a></li>
+							<li><a href="http://dyn.com/traffic-director/">Traffic Director</a></li>
+							<li><a href="http://dyn.com/dynamic-steering/">Dynamic Steering</a></li>
+							</ul>
+						</div>
+						<div class="uk-width-1-3">
+							<p class="uk-h6 uk-margin-small-top">Monitoring &amp; Insights</p>
+							<ul class="uk-nav uk-nav-dropdown">
+							<li><a href="http://dyn.com/internet-intelligence/">Internet Intelligence </a></li>
+							<li><a href="http://dyn.com/dyn-internet-intelligence/">Internet Intelligence - Network</a></li>
+							<li><a href="http://dyn.com/ip-transit-intelligence/">Internet Intelligence - Transit</a></li>
+							<li><a href="http://dyn.com/dyn-internet-alerts/">Internet Alerts</a></li>
+							</ul>
+						</div>
+						<div class="uk-width-1-3">
+							<p class="uk-h6 uk-margin-small-top">IPM Solutions:</p>
+							<ul class="uk-nav uk-nav-dropdown">
+							<li><a href="http://dyn.com/secondary-dns/">Secondary DNS</a></li>
+							<li><a href="http://dyn.com/hybrid-cloud-ipm/">Hybrid Cloud</a></li>
+							<li><a href="http://dyn.com/cdn/">Multi-CDN Strategy</a></li>
+							<li><a href="http://dyn.com/cloud-load-balancing/">Cloud Load-Balancing</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="uk-width-3-10">
+				<h4 class="uk-margin-small-top uk-margin-bottom-remove uk-h6"><i class="uk-margin-small-right uk-icon-home"></i>Personal &amp; SMB:</h4>
+<hr class="uk-margin-small">
+				<ul class="uk-nav uk-nav-dropdown">
+				<li><a href="http://dyn.com/remote-access/">Remote Access (DynDNS)</a></li>
+				<li><a href="http://dyn.com/managed-dns/">Managed DNS</a></li>
+				<li><a href="http://dyn.com/domain-registration/">Domain Registration</a></li>
+				<li><a href="http://dyn.com/standard-dns/">Standard DNS</a></li>
+				</ul>
+                                <h4 class="uk-margin-top uk-h6  uk-margin-small-bottom"><i class="uk-margin-small-right uk-icon-paper-plane"></i>Message Management:</h4>
+<hr class="uk-margin-small uk-margin-bottom">
+<a class="uk-margin-top" href="http://dyn.com/email/">Explore Dyn Email services<i class="uk-icon-arrow-circle-o-right uk-margin-small-left"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+				</li>
+				<!--End Products-->
+<!-- Start Self Serve-->
+<li id="self-serve-v1" class="uk-parent" data-uk-dropdown="{justify:&#39;#top-nav&#39;,hoverDelayIdle:&#39;0&#39;, mode:&#39;hover&#39;}" aria-haspopup="true" aria-expanded="false" style="display:none">
+	<a href="http://dyn.com/products/">Self Serve v1</a>
+	<div class="uk-dropdown uk-dropdown-navbar">
+		<div style="width:1200px" class="uk-container uk-container-center">
+			<div class="uk-grid uk-dropdown-grid uk-margin-top uk-margin-bottom">
+				<div class="uk-width-1-1">
+		<div style="border: 1px solid #d7d7d7; background: #fff; overflow: hidden; padding: 25px" class="uk-panel uk-panel-box">
+						<div class="uk-grid uk-grid-divider">
+							<div class="uk-width-1-3">
+								<h3 style="font-size:20px;"><a href="http://dyn.com/remote-access/">Remote Access</a></h3>
+								<p class="uk-margin-medium">Connect to your work/home devices remotely anyplace, anytime </p>
+								<p class="uk-margin-medium"><a href="http://dyn.com/remote-access" id="get-it-now" class="uk-float-left uk-button uk-button-small uk-button-callout">Learn More</a></p>
+							</div>
+							<div class="uk-width-1-3">
+								<h3 style="font-size:20px;"><a href="http://dyn.com/managed-dns/">Managed DNS</a></h3>
+								<p class="uk-margin-medium">Perfect for eCommerce or high traffic websites and applications</p>
+								<p class="uk-margin-medium"><a href="http://dyn.com/managed-dns/" id="get-it-now" class="uk-float-left uk-button uk-button-small uk-button-callout">Learn More</a></p>
+							</div>
+							<div class="uk-width-1-3">
+								<h3 style="font-size:20px;"><a href="http://dyn.com/standard-dns/">Standard DNS</a></h3>
+								<p class="uk-margin-medium">Perfect for personal or private wesbite and applications</p>
+								<p class="uk-margin-medium"><a href="http://dyn.com/standard-dns/" id="get-it-now" class="uk-float-left uk-button uk-button-small uk-button-callout">Learn More</a></p>
+							</div>
+						</div>
+					</div>
+					<div style="border: 1px solid #d7d7d7; overflow: hidden; padding: 25px;" class="uk-panel uk-panel-box uk-alert">
+						<div class="uk-grid">
+						<p style="font-size:20px;line-height:26px" class="uk-h3 uk-margin-bottom uk-width-1-1"><a href="http://dyn.com/domain-registration/">Find your perfect domain!</a></p>
+						<div class="uk-width-2-4">
+
+						<p>Dyn is a fully accredited registrar with ICANN, making it easy to create new domains or transfer existing ones.</p>
+					</div>
+					<div class="uk-width-1-4">
+						<p class="uk-margin-medium"><a href="http://dyn.com/domain-registration/" id="get-it-now" class="uk-float-left uk-button uk-button-small uk-button-callout">Learn More</a></p>
+					</div>
+					</div>
+						</div>
+				</div>
+				</div>
+
+		</div>
+	</div>
+</li>
+<!-- End Self Serve-->
+<!-- Start Self Serve-->
+<li id="self-serve-v2" class="uk-parent" data-uk-dropdown="{justify:&#39;#top-nav&#39;,hoverDelayIdle:&#39;0&#39;, mode:&#39;hover&#39;}" aria-haspopup="true" aria-expanded="false" style="display:none">
+	<a href="http://dyn.com/products/">Self Serve v2</a>
+	<div class="uk-dropdown uk-dropdown-navbar">
+		<div style="width:1200px" class="uk-container uk-container-center">
+			<div class="uk-grid uk-margin-top uk-margin-bottom">
+			  <div class="uk-width-2-5">
+				  <div class="uk-grid">
+				  <div class="uk-width-1-1">
+					  <h4 class="uk-margin-remove">Products:</h4>
+					  <hr class="uk-margin-small-top uk-margin-bottom">
+				  </div>
+				  <div class="uk-width-1-2">
+					  <ul class="uk-nav uk-nav-dropdown">
+					    <li><a href="http://dyn.com/remote-access/">Remote Access (DynDNS)</a></li>
+					  <li><a href="http://dyn.com/domain-registration/">Domain Registration</a></li>
+					  <li><a href="http://dyn.com/standard-dns/">Standard DNS</a></li>
+					  <li><a href="http://dyn.com/managed-dns/">Managed DNS</a></li>
+					  </ul>
+				  </div>
+				  </div>
+			  </div>
+			<div class="uk-width-3-5">
+				<div class="uk-panel uk-panel-box" style="border:1px solid #d7d7d7;background:#fff">
+				<img width="220px" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/ra-diagram-crop.png" class="uk-align-right uk-margin-bottom-remove" style="margin-right:-15px;margin-bottom:-15px !important">
+				<h3 class="uk-margin-small-top">Access your devices and files. Anywhere, anytime.</h3>
+				<p>Choose a unique hostname (ex: MyHome.dyndns.org) and link it to any IP-compatible device (router, webcam, security camera, file storage, etc.).</p>
+				<a class="uk-button uk-button-callout uk-margin-top">Get Remote Access</a>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</li>
+<!-- End Self Serve-->
+				<!-- Start Resources-->
+				<li data-uk-dropdown="{justify:&#39;#top-nav&#39;,hoverDelayIdle:&#39;0&#39;}" class="uk-parent" id="resources-nav"> <a href="http://hub.dyn.com/">Resources</a>
+				<div class="uk-dropdown uk-dropdown-navbar">
+				  <div style="width:1200px" class="uk-container uk-container-center">
+				    <div class="uk-grid uk-dropdown-grid uk-grid-divider uk-margin-top uk-margin-bottom">
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Featured Blogs</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://hub.dyn.com/h/c/87989-dns">DNS</a></li>
+				          <li><a href="http://hub.dyn.com/h/c/111200-enhancing-cdns">Enhancing CDNs</a></li>
+				          <li><a href="http://hub.dyn.com/h/c/116530-latency">Latency</a></li>
+				          <li><a href="http://hub.dyn.com/h/c/92738-ddos">DDoS</a></li>
+				          <li><a href="http://hub.dyn.com/h/c/111191-security">Security</a></li>
+				          <li><a href="http://hub.dyn.com/h/c/123385-internet-intelligence">Internet Intelligence</a></li>
+				        </ul>
+				        <p><a href="http://hub.dyn.com/h/" class="dyn-blue">See all Dyn Content Hub topics <i class="uk-icon-caret-right"></i></a></p>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Research Blogs</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://research.dyn.com/?cat=221,17">Reports</a></li>
+				          <li><a href="http://research.dyn.com/?cat=223,4,98">Technology</a></li>
+				          <li><a href="http://research.dyn.com/?cat=222,221,116,169,177,218,182,85,185,133,184">Geography</a></li>
+                                          <li><a href="http://research.dyn.com/?cat=216,10,27,122">Disruptions</a></li>
+				        </ul>
+				        <p class="uk-h4">SDK's &amp; APIs</p>
+				        <p>Our SDKs and APIs are the key to getting your developers started with our services.</p>
+				        <p><a href="https://help.dyn.com/developers/" class="dyn-blue">Development Resources <i class="uk-icon-caret-right"></i></a></p>
+				      </div>
+				      <div class="uk-width-2-4">
+				        <div class="uk-grid uk-grid-match" data-uk-grid-match="{target:&#39;.uk-panel&#39;}">
+				          <div class="uk-width-1-2">
+				            <div class="uk-panel uk-panel-box white-bg">
+<div class="uk-panel-teaser"><img alt="Dyn partners with Wiley to create Internet Performance for Dummies guide" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/ip4d.jpg"></div>
+<p class="uk-h4">Internet Performance for Dummies</p>
+<p>To help untangle the “web” of confusion, we partnered with Wiley to create the Internet Performance for Dummies guide.</p>
+<p><a href="http://hub.dyn.com/h/i/134450372-internet-performance-for-dummies" class="optly-resources-promo-left" data="Nav Promo: IPM Dummies Guide">Read More</a></p>
+</div>
+				          </div>
+				          <div class="uk-width-1-2">
+				            <div class="uk-panel uk-panel-box white-bg">
+				              <div class="uk-panel-teaser"> <img alt="A Baker&#39;s Dozen - 2015 Edition" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/bakersdozen-nav.jpg"> </div>
+				              <p class="uk-h4">A Baker's Dozen - 2015 Edition</p>
+				              <p>Our year-end review of how the Internet providers at the top of our Internet Intelligence – Transit global rankings fared over the previous year.</p>
+				              <p><a href="http://hub.dyn.com/h/i/239051215-a-baker-s-dozen-2015-edition" class="optly-resources-promo-right" data="Nav Promo: Baker&#39;s Dozen 2015">Read More</a></p>
+				            </div>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				</li>
+				<!--End Resources-->
+				<!-- Start Support-->
+				<li data-uk-dropdown="{justify:&#39;#top-nav&#39;}" class="uk-parent" id="support-nav"> <a href="http://help.dyn.com/">Support</a>
+				<div class="uk-dropdown uk-dropdown-navbar">
+				  <div style="width:1200px" class="uk-container uk-container-center">
+				    <div class="uk-grid uk-dropdown-grid uk-grid-divider uk-margin-top uk-margin-bottom">
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Product Help</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="https://help.dyn.com/dns-knowledge-base/">Managed DNS</a></li>
+				          <li><a href="https://help.dyn.com/standard-dns/">Standard DNS</a></li>
+				          <li><a href="https://help.dyn.com/remote-access/">Remote Access</a></li>
+				          <li><a href="https://help.dyn.com/domain-registration/">Domain Registration</a></li>
+				          <li><a href="https://help.dyn.com/email-knowledge-base/">Email Delivery</a></li>
+				          <li><a href="https://help.dyn.com/internet-intelligence/">Internet Intelligence</a></li>
+				          <li><a href="https://help.dyn.com/update-clients/">Updater Clients</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Support Resources</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="https://help.dyn.com/">Dyn Help Center</a></li>
+				          <li><a href="http://www.dyncommunity.com/">Dyn User Community</a></li>
+				          <li><a href="https://dynstatus.com/">Dyn Status Updates</a></li>
+				          <li><a href="https://help.dyn.com/developers/">Developer Documentation</a></li>
+				          <li><a href="https://help.dyn.com/billing/">Billing FAQs</a></li>
+				          <li><a href="http://dyn.com/apps/updater/">Updater Client Downloads</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Dyn Services</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://dyn.com/services/">Support</a></li>
+				          <li><a href="http://dyn.com/services/#wrap-4">Professional Services</a></li>
+				          <li><a href="http://dyn.com/services/#wrap-5">Training</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Contact Sales</p>
+<p><strong>U.S.</strong> +1-888-840-3258</p>
+<p><strong>EMEA</strong> +44-127-325-7289</p>
+<p><strong>Singapore</strong>  +65 6818 6153</p>
+<p><a class="uk-button uk-button-callout" href="http://dyn.com/about/contact-us/">Speak With An Expert</a></p>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				</li>
+				<!--End Support-->
+				<!-- Start Company-->
+				<li data-uk-dropdown="{justify:&#39;#top-nav&#39;}" class="uk-parent" id="company-nav"> <a href="http://dyn.com/about/">Company</a>
+				<div class="uk-dropdown uk-dropdown-navbar">
+				  <div style="width:1200px" class="uk-container uk-container-center">
+				    <div class="uk-grid uk-dropdown-grid uk-grid-divider uk-margin-top uk-margin-bottom">
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Company</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://dyn.com/about/">About Dyn</a></li>
+				          <li><a href="http://dyn.com/about/careers/">Career Opportunities</a></li>
+				          <li><a href="http://dyn.com/about/board-of-directors-leadership/">Board of Directors</a></li>
+				          <li><a href="http://dyn.com/about/leadership-team/">Leadership Team</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Relationships</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://dyn.com/customers-employees-community/">Customers, Employees, Community</a></li>
+				          <li><a href="http://dyn.com/about/clients/">Customer Success Stories</a></li>
+				          <li><a href="http://dyn.com/about/partners/">Partners</a></li>
+				          <li><a href="http://dyn.com/about/customer-advisory-board/">Customer Advisory Board</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <p class="uk-h4">Happenings</p>
+				        <ul class="uk-nav uk-nav-dropdown">
+				          <li><a href="http://dyn.com/about/events/">Events &amp; Appearances</a></li>
+				          <li><a href="http://dyn.com/about/press/">Press Releases &amp; Communications</a></li>
+				          <li><a href="http://dyn.com/about/in-the-news/">In The News</a></li>
+				          <li><a href="http://dyn.com/about/awards-and-honors/">Awards &amp; Honors</a></li>
+				        </ul>
+				      </div>
+				      <div class="uk-width-1-4">
+				        <div class="uk-panel uk-panel-box white-bg">
+				          <div class="uk-panel-teaser"><img width="800" height="280" alt="Webinar: Internet Business Continuity" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/WB061_Homepage.jpg"><div class="uk-panel-badge uk-badge" style="background: rgb(199, 36, 177); color:#fff;">WEBINAR</div></div>
+				          <p class="uk-h4">DNS For Hybrid Cloud Success</p>
+				          <p>October 19th at 11am EDT</p>
+				          <p><a class="uk-button-small uk-button-callout uk-text-center uk-display-block optly-company-promo" href="http://pages.dyn.com/WB_Live_SE_DontOverlookDNS_18Oct2016_SeptemberSELandingPage.html" data="Nav Promo:  DNS for Hybrid Cloud">Register Today</a></p>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				</li>
+				<!--End Company-->
+			</ul>
+			<!-- START RIGHT SMALL NAV -->
+			<ul class="uk-navbar-nav uk-visible-large uk-navbar-flip">
+				<li id="new-search">
+					<form class="uk-search uk-margin-left" action="http://dyn.com/" __bizdiag="115" __biza="WJ__">
+						<input type="text" autocomplete="off" id="s" name="s" value="" placeholder="Search Dyn" class="uk-search-field">
+						<div aria-expanded="false" class="uk-dropdown uk-dropdown-navbar uk-dropdown-search"></div>
+					</form>
+				</li>
+				<!--End Search-->
+				<!--Start Signin-->
+				<li class="uk-parent" data-uk-dropdown="" id="signin-nav">
+					<a class="optly-sign-in" href="http://account.dyn.com/entrance/">
+						<i class="uk-icon-user"></i> Sign In <i class="uk-icon-caret-down"></i>
+					</a>
+					<div class="uk-dropdown uk-dropdown-navbar uk-dropdown-flip">
+	<p class="uk-h4">Personal Portal</p>
+  <ul class="uk-nav uk-nav-dropdown uk-text-left">
+    <li><a class="optly-my-dyn-dns" href="http://account.dyn.com/entrance/">My DynDNS Account</a></li>
+  </ul>
+  <hr>
+  <p class="uk-h4 uk-margin-top">Product Portals</p>
+  <ul class="uk-nav uk-nav-dropdown uk-text-left">
+    <li><a class="optly-managed-dns" href="https://portal.dynect.net/login/">Managed DNS</a></li>
+    <li><a class="optly-email-delivery" href="https://portal.dynect.net/login/">Email Delivery</a></li>
+    <li><a class="optly-internet-intelligence" href="https://ii.dynect.net/login/">Internet Intelligence</a></li>
+    <li><a class="optly-ii-network" href="https://dii.dyn.com/dii/">II - Network</a></li>
+    <li><a class="optly-ii-transit" href="https://mi.renesys.com/mi/">II - Transit</a></li>
+  </ul>
+</div>
+				</li>
+				<!--End Signin-->
+			</ul>
+		</div>
+	</nav>
+	<div id="nav-promo">
+		<div class="uk-container uk-container-center uk-text-center">
+			<p class="uk-margin-small-top uk-margin-small-bottom">Managed DNS: Fast, reliable DNS without breaking the bank. <em>Get your first 7 days <strong>FREE</strong> today!</em> <a href="http://dyn.com/managed-dns-express-free-month/?via=top-nav" class="black-link uk-margin-left" id="promo-link">Get it now <i class="uk-icon-chevron-circle-right"></i></a></p>
+		</div>
+	</div>
+	<div id="off-canvas-mobile-nav" class="uk-offcanvas">
+  <div class="uk-offcanvas-bar uk-offcanvas-bar-flip" style="top: 60px;">
+     <a href="https://account.dyn.com/entrance/" class="uk-button uk-button-callout uk-margin-top uk-margin-right uk-margin-left uk-display-block">Sign In</a>
+ <form class="uk-search" method="get" id="search" action="http://dyn.com/" __biza="WJ__" __bizdiag="115">
+        <input class="uk-search-field" type="text" placeholder="Search Dyn" value="" name="s" id="s">
+    </form>
+    <ul class="offnav uk-nav">
+
+  <li class="uk-parent uk-nav-offcanvas"><p class="uk-h4 uk-margin-left dyn-yellow">Products</p>
+       <ul class="uk-nav-sub" id="products-mobile">
+           <li class="uk-nav-header uk-padding-remove">Internet Intelligence</li>
+           <li><a href="http://dyn.com/internet-intelligence/">Internet Intelligence</a></li>
+           <li><a href="http://dyn.com/dyn-internet-intelligence/">Internet Intelligence - Network</a></li>
+           <li><a href="http://dyn.com/ip-transit-intelligence/">Internet Intelligence - Transit</a></li>
+           <li><a href="http://dyn.com/dyn-internet-alerts/">Internet Alerts</a></li>       
+           <li class="uk-nav-header uk-padding-remove">Traffic Management</li>
+           <li><a href="http://dyn.com/managed-dns/">Managed DNS</a></li>
+           <li><a href="http://dyn.com/active-failover/">Active Failover</a></li>
+           <li><a href="http://dyn.com/traffic-director/">Traffic Director</a></li>
+           <li class="uk-nav-header uk-padding-remove">Domain Services</li>
+           <li><a href="http://dyn.com/remote-access/">Remote Access (DynDNS)</a></li>
+           <li><a href="http://dyn.com/domain-registration/">Domain Registration</a></li>
+           <li><a href="http://dyn.com/standard-dns/">Standard DNS</a></li>
+           <li class="uk-nav-header uk-padding-remove">Message Management</li>
+           <li><a href="http://dyn.com/email-delivery/">Email Delivery</a></li>
+           <li><a href="http://dyn.com/reputation-management/">Reputation Management</a></li>      
+           </ul>
+   </li>
+<hr>
+      <li class="uk-parent uk-nav-offcanvas"><p class="uk-h4 uk-margin-left dyn-yellow">Resources</p>
+       <ul class="uk-nav-sub">
+           <li><a href="http://hub.dyn.com/h/">Content Hub</a></li>
+           <li><a href="http://research.dyn.com/">Dyn Research</a></li>
+           <li><a href="https://help.dyn.com/developers/">SDK's &amp; APIs</a></li>
+	   </ul>
+   </li>
+   <hr>
+    <li class="uk-parent uk-nav-offcanvas"><p class="uk-h4 uk-margin-left dyn-yellow">Support</p>
+       <ul class="uk-nav-sub">
+           <li class="uk-nav-header uk-padding-remove">Product Help</li>
+           <li><a href="https://help.dyn.com/">Dyn Help Center</a></li>
+	   <li><a href="http://www.dyncommunity.com/">Dyn User Community</a></li>
+	   <li><a href="https://dynstatus.com/">Dyn Status Updates</a></li>
+	   <li><a href="https://help.dyn.com/developers/">Developer Documentation</a></li>
+	   <li><a href="https://help.dyn.com/billing/">Billing FAQs</a></li>
+	   <li><a href="http://dyn.com/apps/updater/">Updater Client Downloads</a></li>
+           <li class="uk-nav-header uk-padding-remove">Contact Sales</li>
+           <li class="white">U.S.&nbsp;+1-888-840-3258</li>
+           <li class="white">EMEA&nbsp;+44-127-325-7289</li>
+           <li class="white">Sydney&nbsp;+61-2-8019-7113</li>
+           <li class="white">Singapore&nbsp;+65 6818 6153</li>
+           <li><a href="http://dyn.com/about/contact-us/">Speak With An Expert</a></li>
+	   </ul>
+   </li>
+ <hr>
+   <li class="uk-parent uk-nav-offcanvas"><p class="uk-h4 uk-margin-left dyn-yellow">Company</p>
+       <ul class="uk-nav-sub">
+           <li><a href="http://dyn.com/about/">About</a></li>
+           <li><a href="http://dyn.com/about/events/">Events</a></li>
+           <li><a href="http://dyn.com/about/press/">Press</a></li>
+           <li><a href="http://dyn.com/about/partners/">Partners</a></li>
+           <li><a href="http://dyn.com/about/clients/">Customers</a></li>           
+           <li><a href="http://dyn.com/about/careers/">Careers</a></li>   
+	   </ul>
+   </li>
+  
+</ul>
+</div>
+</div>
+	
+<span itemscope="" itemtype="http://schema.org/Article">
+<meta itemprop="articleBody" content=".top_nav_promotion,.banner{display:none}
+The Domain Name System (aka DNS) is used to resolve human-readable hostnames like www.Dyn.com into machine-readable IP addresses like 204.13.248.115. DNS also provides other information about domain names, such as mail services.
+
+But why is DNS important? How does it work? What else should you know?
+Why is DNS important?
+DNS is like a phone book for the Internet. If you know a person&#39;s name but don&#39;t know their telephone number, you can simply look it up in a phone book. DNS provides this same service to the Internet.
+
+When you visit http://dyn.com in a browser, your computer uses DNS to retrieve the website&#39;s IP address of 204.13.248.115. Without DNS, you would only be able to visit our website (or any website) by visiting its IP address directly, such as http://204.13.248.115.
+How does DNS work?
+
+When you visit a domain such as dyn.com, your computer follows a series of steps to turn the human-readable web address into a machine-readable IP address. This happens every time you use a domain name, whether you are viewing websites, sending email or listening to Internet radio stations like Pandora.
+
+Step 1: Request information
+
+The process begins when you ask your computer to resolve a hostname, such as visiting http://dyn.com. The first place your computer looks is its local DNS cache, which stores information that your computer has recently retrieved.
+
+If your computer doesn&#39;t already know the answer, it needs to perform a DNS query to find out.
+
+Step 2: Ask the recursive DNS servers
+
+If the information is not stored locally, your computer queries (contacts) your ISP&#39;s recursive DNS servers. These specialized computers perform the legwork of a DNS query on your behalf. Recursive servers have their own caches, so the process usually ends here and the information is returned to the user.
+
+Step 3: Ask the root nameservers
+
+If the recursive servers don&#39;t have the answer, they query the root nameservers. A nameserver is a computer that answers questions about domain names, such as IP addresses. The thirteen root nameservers act as a kind of telephone switchboard for DNS. They don&#39;t know the answer, but they can direct our query to someone that knows where to find it.
+
+Step 4: Ask the TLD nameservers
+
+The root nameservers will look at the first part of our request, reading from right to left — www.dyn.com — and direct our query to the Top-Level Domain (TLD) nameservers for .com. Each TLD, such as .com, .org, and .us, have their own set of nameservers, which act like a receptionist for each TLD. These servers don&#39;t have the information we need, but they can refer us directly to the servers that do have the information.
+
+Step 5: Ask the authoritative DNS servers
+
+The TLD nameservers review the next part of our request — www.dyn.com — and direct our query to the nameservers responsible for this specific domain. These authoritative nameservers are responsible for knowing all the information about a specific domain, which are stored in DNS records. There are many types of records, which each contain a different kind of information. In this example, we want to know the IP address for www.dyndns.com, so we ask the authoritative nameserver for the Address Record (A).
+
+Step 6: Retrieve the record
+
+The recursive server retrieves the A record for dyn.com from the authoritative nameservers and stores the record in its local cache. If anyone else requests the host record for dyn.com, the recursive servers will already have the answer and will not need to go through the lookup process again. All records have a time-to-live value, which is like an expiration date. After a while, the recursive server will need to ask for a new copy of the record to make sure the information doesn&#39;t become out-of-date.
+
+Step 7: Receive the answer
+
+Armed with the answer, recursive server returns the A record back to your computer. Your computer stores the record in its cache, reads the IP address from the record, then passes this information to your browser. The browser then opens a connection to the webserver and receives the website.
+
+This entire process, from start to finish, takes only milliseconds to complete.">
+<meta itemprop="url" content="http://dyn.com/blog/dns-why-its-important-how-it-works/">
+		
+<div id="wrap-1">
+	<div class="uk-container uk-container-center">
+		<h1 itemprop="name">DNS: Why It’s Important &amp; How It Works</h1>
+	</div>
+</div>
+<div id="wrap-2" class="breadcrumb">
+	<div class="uk-container uk-container-center">
+		<!-- Breadcrumb NavXT 5.4.0 -->
+<a title="Go Dyn" href="http://dyn.com/">Dyn</a> » <a title="Go to the DNS Traffic Management category archives." href="http://dyn.com/blog/category/dns/">DNS Traffic Management</a> » DNS: Why It’s Important &amp; How It Works	</div>
+</div>
+<div id="wrap-3">
+	<div class="uk-container uk-container-center">
+		<div class="uk-grid uk-grid-divider uk-flex" data-uk-grid-margin="">
+			<div class="uk-width-small-1-1 uk-width-large-1-5 uk-padding-remove uk-flex-order-last uk-flex-order-first-large">
+				<div class="uk-panel uk-panel-box uk-padding-remove">
+
+		
+		  	<ul class="uk-nav uk-nav-side uk-padding-remove" id="sidenav">
+	  		<li class="cat-item cat-item-1135"><a href="http://dyn.com/blog/category/blog/">Blog</a>
+</li>
+	<li class="cat-item cat-item-1001"><a href="http://dyn.com/blog/category/client-partner-profile/">Client &amp; Partner Profiles</a>
+</li>
+	<li class="cat-item cat-item-224"><a href="http://dyn.com/blog/category/client-services/">Client Services</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://dyn.com/blog/category/press-releases-news-company-updates/" title="All of the Dyn company news that&#39;s fit to print.">Company News &amp; Updates</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://dyn.com/blog/category/company-voices/" title="Thoughts and insight from some of the best and brightest at Dyn.">Company Voices</a>
+</li>
+	<li class="cat-item cat-item-20"><a href="http://dyn.com/blog/category/culture/">Culture</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://dyn.com/blog/category/dns/">DNS Traffic Management</a>
+</li>
+	<li class="cat-item cat-item-1207"><a href="http://dyn.com/blog/category/dyn-internet-intelligence/">Dyn Internet Intelligence</a>
+</li>
+	<li class="cat-item cat-item-1125"><a href="http://dyn.com/blog/category/dyn-research/">Dyn Research</a>
+</li>
+	<li class="cat-item cat-item-1138"><a href="http://dyn.com/blog/category/dynedu/">DynEdu</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://dyn.com/blog/category/email/" title="Email can be a complicated thing, but it really doesn&#39;t have to be. Here are best practices and insight from some of the world&#39;s best.">Email Message Management</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://dyn.com/blog/category/email-newsletters/">Email Newsletters</a>
+</li>
+	<li class="cat-item cat-item-21"><a href="http://dyn.com/blog/category/events-dyn-communication/">Events</a>
+</li>
+	<li class="cat-item cat-item-1341"><a href="http://dyn.com/blog/category/industry/">Industry</a>
+</li>
+	<li class="cat-item cat-item-1342"><a href="http://dyn.com/blog/category/internet-insights/">Internet Insights</a>
+</li>
+	<li class="cat-item cat-item-1291"><a href="http://dyn.com/blog/category/internet-intelligence/">Internet Intelligence</a>
+</li>
+	<li class="cat-item cat-item-1241"><a href="http://dyn.com/blog/category/internet-performance/">Internet Performance</a>
+</li>
+	<li class="cat-item cat-item-1175"><a href="http://dyn.com/blog/category/performance-assurance/">Performance Assurance</a>
+</li>
+	<li class="cat-item cat-item-25"><a href="http://dyn.com/blog/category/product-updates-integration-updates/" title="The latest information on Dyn products and integration including what&#39;s coming and what&#39;s improved.">Product &amp; Integration Updates</a>
+</li>
+	<li class="cat-item cat-item-1340"><a href="http://dyn.com/blog/category/products/">Products</a>
+</li>
+	<li class="cat-item cat-item-1344"><a href="http://dyn.com/blog/category/stories/">Stories</a>
+</li>
+	<li class="cat-item cat-item-1330"><a href="http://dyn.com/blog/category/tech-talk/">Tech Talk</a>
+</li>
+	<li class="cat-item cat-item-547"><a href="http://dyn.com/blog/category/web-design-development-tips/" title="On the search for constant improvements to Dyn.com.">Web Design &amp; Development Tips</a>
+</li>
+	  	<li><a href="http://feeds.feedburner.com/dyn-blog"><i class="uk-icon-rss"></i> RSS Feed</a></li>
+	  	</ul>
+	
+</div>			</div>
+			<div class="uk-width-small-1-1 uk-width-large-4-5 uk-margin-large-bottom">
+				<div class="post-12524 post type-post status-publish format-standard hentry category-dns tag-14-dns-industry tag-dynect-dns tag-5-dns" id="post-12524">
+				<div class="uk-grid uk-margin-bottom">
+
+	<div class="uk-width-small-1-1 uk-width-large-1-2">
+	<img itemprop="image" class="uk-float-left uk-margin-right author" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/da45c113616695d252910fd83d6adb21.png">		<span>By 
+			<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+				<span itemprop="name">
+					<a href="http://dyn.com/blog/author/chrisgonyea/" title="Posts by Chris Gonyea" rel="author">Chris Gonyea</a>				</span>
+			</span>
+		</span>
+		
+					<p class="uk-margin-remove uk-padding-remove">Product Manager, Traffic Management</p>
+					<p class="uk-margin-remove uk-padding-remove"><a href="http://twitter.com/@ChrisGonyea" title="Twitter"> @ChrisGonyea</a></p>
+				<p itemprop="datePublished" content="Aug 25, 2010" class="uk-margin-remove uk-padding-remove">Aug 25, 2010</p>
+	</div>
+	
+	<div class="uk-width-small-1-1 uk-width-large-1-2 uk-text-right">
+		<div class="social-scripts count-top"><div class="async-tw"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/tweet_button.39f7ee9fffbd122b7a37a520dbdaebc6.en.html" style="position: static; visibility: visible; width: 61px; height: 20px;"></iframe></div><div class="async-fb"><div class="fb-like fb_iframe_widget" data-send="false" data-layout="box_count" data-width="50" data-show-faces="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;container_width=0&amp;href=http%3A%2F%2Fdyn.com%2Fblog%2Fdns-why-its-important-how-it-works%2F&amp;layout=box_count&amp;locale=en_US&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=50"><span style="vertical-align: bottom; width: 50px; height: 61px;"><iframe name="f2d362da6f630bc" width="50px" height="1000px" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/like.html" style="border: none; visibility: visible; width: 50px; height: 61px;" class=""></iframe></span></div></div><div class="async-gp"><div id="___plusone_0" style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 50px; height: 60px;"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 50px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 60px;" tabindex="0" vspace="0" width="100%" id="I0_1477386667059" name="I0_1477386667059" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/fastbutton.html" data-gapiattached="true" title="+1"></iframe></div></div><div class="async-li"><span class="IN-widget" style="line-height: 1; vertical-align: baseline; display: inline-block; text-align: center;"><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1477386667899_1-container" class="IN-top"><span id="li_ui_li_gen_1477386667899_1" class="IN-top"><span id="li_ui_li_gen_1477386667899_1-inner" class="IN-top"><span id="li_ui_li_gen_1477386667899_1-content" class="IN-top">9</span></span></span></span></span><br><span style="padding: 0px !important; margin: 0px !important; text-indent: 0px !important; display: inline-block !important; vertical-align: baseline !important; font-size: 1px !important;"><span id="li_ui_li_gen_1477386667890_0"><a id="li_ui_li_gen_1477386667890_0-link" href="javascript:void(0);"><span id="li_ui_li_gen_1477386667890_0-logo">in</span><span id="li_ui_li_gen_1477386667890_0-title"><span id="li_ui_li_gen_1477386667890_0-mark"></span><span id="li_ui_li_gen_1477386667890_0-title-text">Share</span></span></a></span></span></span><script type="IN/Share+init" data-counter="top"></script></div></div><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/fTmIQU3LxvB.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/fTmIQU3LxvB(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><!-- fb needs this -->	</div>
+	
+</div>
+<hr class="uk-margin-top">				<style>.top_nav_promotion,.banner{display:none}</style>
+<p>The Domain Name System (aka <a href="http://dyn.com/dns/">DNS</a>) is used to resolve human-readable hostnames like www.Dyn.com <em></em>into machine-readable IP addresses like <em><em>204.13.248.115</em></em>. DNS also provides other information about domain names, such as mail services.</p>
+<p>But why is DNS important? How does it work? What else should you know?<span id="more-12524"></span></p>
+<h2>Why is DNS important?</h2>
+<p>DNS is like a phone book for the Internet. If you know a person’s name but don’t know their telephone number, you can simply look it up in a phone book. DNS provides this same service to the Internet.</p>
+<p>When you visit <em>http://dyn.com </em>in a browser, your computer uses DNS to retrieve the website’s IP address of<em> 204.13.248.115</em>. Without DNS, you would only be able to visit our website (or any website) by visiting its IP address directly, such as <em>http://<em>204.13.248.115</em></em>.</p>
+<h2 id="how">How does DNS work?</h2>
+<div><img class="alignright" style="border: 0pt none;" title="What is DNS? - DNS Flow Chart" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/dnsflowchart-static.gif" alt="What is DNS? - DNS Flow Chart" width="372" height="210" border="0"></div>
+<p>When you visit a domain such as <em>dyn.com, </em>your computer follows a series of steps to turn the human-readable web address into a machine-readable IP address. This happens every time you use a domain name, whether you are viewing websites, sending email or listening to Internet radio stations like <a href="http://www.pandora.com/">Pandora</a>.</p>
+<p><strong>Step 1: Request information</strong></p>
+<p>The process begins when you ask your computer to resolve a hostname, such as visiting <em>http://dyn.com</em>. The first place your computer looks is its local <a href="http://dyn.com/dyn-tech-everything-you-ever-wanted-to-know-about-ttls/">DNS cache</a>, which stores information that your computer has recently retrieved.</p>
+<p>If your computer doesn’t already know the answer, it needs to perform a <strong>DNS query</strong> to find out.<strong></strong></p>
+<p><strong>Step 2: Ask the recursive DNS servers</strong></p>
+<p>If the information is not stored locally, your computer queries (contacts) your ISP’s <strong>recursive DNS servers</strong>. These specialized computers perform the legwork of a DNS query on your behalf. Recursive servers have their own caches, so the process usually ends here and the information is returned to the user.</p>
+<p><strong>Step 3: Ask the root nameservers</strong></p>
+<p>If the recursive servers don’t have the answer, they query the <strong>root nameservers</strong>. A <strong>nameserver</strong> is a computer that answers questions about domain names, such as IP addresses. The thirteen root nameservers act as a kind of telephone switchboard for DNS. They don’t know the answer, but they can direct our query to someone that knows where to find it.<strong></strong></p>
+<p><strong>Step 4: Ask the TLD nameservers</strong></p>
+<p>The root nameservers will look at the first part of our request, reading from right to left — <em>www.dyn.<strong>com</strong></em> — and direct our query to the <a href="http://dyn.com/dns/domain-registration/supported-tlds/"><strong>Top-Level Domain (TLD) nameservers</strong></a> for <em>.com</em>. Each TLD, such as <em>.com</em>, <em>.org</em>, and <em>.us</em>, have their own set of nameservers, which act like a receptionist for each TLD. These servers don’t have the information we need, but they can refer us directly to the servers that <em>do</em> have the information.</p>
+<p><strong>Step 5: Ask the authoritative DNS servers</strong></p>
+<p>The TLD nameservers review the next part of our request — <em>www.<strong>dyn.com</strong></em> — and direct our query to the nameservers responsible for this <em>specific</em> domain. These <strong>authoritative nameservers</strong> are responsible for knowing all the information about a specific domain, which are stored in <strong>DNS records</strong>. There are many types of records, which each contain a different kind of information. In this example, we want to know the IP address for <em>www.dyndns.com</em>, so we ask the authoritative nameserver for the <strong>Address Record (A)</strong>.<strong></strong></p>
+<p><strong>Step 6: Retrieve the record</strong></p>
+<p>The recursive server retrieves the A record for <em>dyn.com</em> from the authoritative nameservers and stores the record in its local cache. If anyone else requests the host record for <em>dyn.com</em>, the recursive servers will already have the answer and will not need to go through the lookup process again. All records have a <strong>time-to-live</strong> value, which is like an expiration date. After a while, the recursive server will need to ask for a new copy of the record to make sure the information doesn’t become out-of-date.<strong></strong></p>
+<p><strong>Step 7: Receive the answer</strong></p>
+<p>Armed with the answer, recursive server returns the A record back to your computer. Your computer stores the record in its cache, reads the IP address from the record, then passes this information to your browser. The browser then opens a connection to the webserver and receives the website.</p>
+<p>This entire process, from start to finish, takes only milliseconds to complete.</p>
+									<p class="uk-alert"><a href="https://plus.google.com/+ChrisGonyea-Dyn/">Chris Gonyea</a> is Product Manager, Traffic Management at Dyn, a cloud-based Internet Performance company that helps companies monitor, control, and optimize online infrastructure for an exceptional end-user experience. Follow on Twitter (<a href="http://www.twitter.com/ChrisGonyea">@ChrisGonyea</a> and <a href="http://www.twitter.com/Dyn">@Dyn</a>).</p>
+												<div class="banner contacting"><a href="http://dyn.com/blog/dns-why-its-important-how-it-works/#blog-cta-open" class="cta" id="blog-cta-open">Find out.</a>Why do we think DNS is sexy?</div><div id="blog-cta-content" style="display: none;"></div>				<h2>Related Posts</h2><ul class="related-posts">		<li><a href="http://dyn.com/blog/the-best-of-pycon-2014-what-you-need-to-see/" rel="bookmark" title="The Best Of PyCon 2014: What You Need To See">
+					<span style="background-image:url(http://dyn.com/wp-content/uploads/2014/05/pycon2014-logo-hires.png);">	
+		The Best Of PyCon 2014: What You Need To See</span>The Best Of PyCon 2014: What You Need To See</a>
+		</li>
+			<li><a href="http://dyn.com/blog/the-resilient-internet-why-you-cant-shut-it-down/" rel="bookmark" title="The Resilient Internet: Why You Can’t Shut It Down">
+					<span style="background-image:url(http://dyn.com/wp-content/uploads/2014/04/7layer300.png);">	
+		The Resilient Internet: Why You Can’t Shut It Down</span>The Resilient Internet: Why You Can’t Shut It Down</a>
+		</li>
+			<li><a href="http://dyn.com/blog/how-does-dyn-deliver-on-powering-the-internet-by-investing-in-standards-organizations-like-the-ietf/" rel="bookmark" title="Why Dyn Powers Standards Organizations Like The IETF">
+					<span class="default-img">
+		Why Dyn Powers Standards Organizations Like The IETF</span>Why Dyn Powers Standards Organizations Like The IETF</a>
+		</li>
+			<li><a href="http://dyn.com/blog/dns-101-explaining-how-hijacks-can-happen/" rel="bookmark" title="DNS Security: Three Ways That Hijacks Can Happen">
+					<span style="background-image:url(http://dyn.com/wp-content/uploads/2013/08/NYTSEA.jpg);">	
+		DNS Security: Three Ways That Hijacks Can Happen</span>DNS Security: Three Ways That Hijacks Can Happen</a>
+		</li>
+			<li><a href="http://dyn.com/blog/geek-summer-camp-cricket-liu-ipv6-infoblox/" rel="bookmark" title="Geek Summer Camp: Infoblox’s Cricket Liu on the IPv6 situation">
+					<span style="background-image:url(http://dyn.com/wp-content/uploads/2013/08/ipv6.jpg);">	
+		Geek Summer Camp: Infoblox’s Cricket Liu on the IPv6 situation</span>Geek Summer Camp: Infoblox’s Cricket Liu on the IPv6 situation</a>
+		</li>
+	</ul>				</div><!-- end post -->
+			</div>
+		</div>
+	</div>
+</div>
+
+</span>
+<!-- end content -->
+	
+
+<div class="footer">
+	<div class="uk-container uk-container-center">
+		<div class="uk-grid" data-uk-grid-margin="">
+			<div class="uk-width-small-1-1 uk-width-large-2-5">
+					<h5 class="white">Connect with Us!</h5>
+<a href="http://twitter.com/Dyn" class="uk-icon-button uk-icon-twitter"></a>
+<a href="http://www.facebook.com/Dyn" class="uk-icon-button uk-icon-facebook"></a>
+<a href="http://www.linkedin.com/company/dyn" class="uk-icon-button uk-icon-linkedin"></a>
+<a href="http://www.youtube.com/dyninc" class="uk-icon-button uk-icon-youtube"></a>
+<div style="text-indent: 0px; margin: 0px; padding: 0px; background: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; width: 38px; height: 24px;" id="___plusone_1"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 38px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 24px;" tabindex="0" vspace="0" width="100%" id="I1_1477386667064" name="I1_1477386667064" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/fastbutton(1).html" data-gapiattached="true" title="+1"></iframe></div>
+</div> 
+                    
+<div class="uk-width-small-1-1 uk-width-medium-1-3 uk-width-large-1-5">
+<h4 class="dyn-yellow">Company</h4>
+<ul class="uk-list uk-list-space">
+<li><a href="http://dyn.com/about/">About</a></li>
+<li><a href="http://dyn.com/about/careers/">Careers</a></li>
+<li><a href="http://dyn.com/clients/">Customers</a></li>
+<li><a href="http://dyn.com/about/partners/">Partners</a></li>
+<li><a href="http://dyn.com/about/events/">Events</a></li>
+</ul>
+</div>
+
+<div class="uk-width-small-1-1 uk-width-medium-1-3 uk-width-large-1-5">
+<h4 class="dyn-yellow">Products</h4>
+<ul class="uk-list uk-list-space">
+<li><a href="http://dyn.com/internet-intelligence/">Internet Intelligence</a></li>
+<li><a href="http://dyn.com/traffic-director/">Traffic Director</a></li>
+<li><a href="http://dyn.com/managed-dns/">Managed DNS</a></li>
+<li><a href="http://dyn.com/remote-access/">Remote Access (DynDNS)</a></li>
+<li><a href="http://dyn.com/email-delivery/">Email Delivery</a></li>
+</ul>
+</div>
+
+<div class="uk-width-small-1-1  uk-width-medium-1-3 uk-width-large-1-5">
+<h4 class="dyn-yellow">Resources</h4>
+<ul class="uk-list uk-list-space">
+<li><a href="http://hub.dyn.com/">Content Hub</a></li>
+ <li><a href="http://help.dyn.com/">Support Knowledgebase</a></li>
+<li><a href="http://dyn.com/developers/">Developer Center</a></li>
+<li><a href="http://www.dynstatus.com/">Dyn Status</a></li>
+<li><a href="http://www.dyndnscommunity.com/">Dyn Community Forum</a></li>
+</ul>
+</div>
+</div>
+                    
+<div class="uk-grid" id="four-contacts" data-uk-grid-margin="">
+<div class="uk-width-small-1-1 uk-width-large-1-1">
+<h3 class="dyn-yellow">Contact Dyn</h3>
+</div>
+                    
+<div class="uk-width-small-1-1 uk-width-large-1-3 uk-grid-margin"><h5 class="white">Global HQ:</h5> 150 Dow Street – Tower Two<br>Manchester, NH, USA 03101 <br>Office: +1-603-668-4998<br>Sales: +1-888-840-3258<br><a href="http://help.dyn.com/" class="uk-margin-small-top footer-contact">Contact Customer Support</a>
+</div>
+                    
+<div class="uk-width-small-1-1 uk-width-large-1-3 uk-grid-margin"><h5 class="white">EMEA Regional HQ:</h5> Queensberry House<br>103-109 Queens Rd<br>Brighton, UK BN1 3XF<br>Sales: +44-127-325-7289<br><a href="http://help.dyn.com/" class="uk-margin-small-top footer-contact">Contact Customer Support</a>
+</div>
+
+<div class="uk-width-small-1-1 uk-width-large-1-3 uk-grid-margin"><h5 class="white">Asia Pacific Office:</h5>Level 39 Marina Bay Financial Centre Tower 2<br>10 Marina Boulevard Singapore 018983<br>Sales: +65 6818 6153<br><a href="http://help.dyn.com/" class="uk-margin-small-top footer-contact">Contact Customer Support</a>
+</div>         
+</div>
+                
+<div class="uk-grid" data-uk-grid-margin="">
+<div class="footer-copyright uk-width-small-1-1 uk-width-large-1-1 uk-text-center">
+<p>Dyn - 150 Dow St., Manchester, NH 03101     |     © 1998-<script>document.write(new Date().getFullYear())</script>2016 Dynamic Network Services, Inc. — <a href="http://dyn.com/legal/">Legal Notices</a> — <a href="http://dyn.com/legal/dyn-privacy-policy/">Privacy Policy</a> — <a href="http://dyn.com/reporting-abuse/">Reporting Abuse</a></p>
+</div>
+</div>
+</div></div>
+<div class="foot-wrap-search">
+	<div class="uk-container uk-container-center">
+		<div class="uk-width-small-1-1 uk-width-large-1-1">
+			<form class="uk-search" method="get" id="search" action="http://dyn.com/" __biza="WJ__" __bizdiag="115">
+    			<input class="uk-search-field" type="text" placeholder="Search Dyn" value="" name="s" id="s">
+				</form>
+        </div>
+    </div>
+</div>
+
+    
+<!-- JQuery Script -->
+
+<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/jquery.js"></script>
+<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/uikit.js"></script>
+<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/jquery-migrate-1.2.1.js"></script>
+<script type="text/javascript" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/scroll.js"></script>
+<script type="text/javascript">/*<![CDATA[*/var jQl={q:[],dq:[],ready:function(a){typeof a=="function"&&jQl.q.push(a);return jQl},unq:function(){for(var a=0;a<jQl.q.length;a++)jQl.q[a]();jQl.q=[]},bId:null,boot:function(a){typeof window.jQuery.fn=="undefined"?jQl.bId||(jQl.bId=setInterval(function(){jQl.boot(a)},25)):(jQl.bId&&clearInterval(jQl.bId),jQl.bId=0,jQl.unqjQdep(),$(jQl.unq()),typeof a=="function"&&a())},booted:function(){return jQl.bId===0},loadjQ:function(a,b){setTimeout(function(){var b=document.createElement("script");b.src=a,document.getElementsByTagName("head")[0].appendChild(b)},1),jQl.boot(b)},loadjQdep:function(a){jQl.loadxhr(a,jQl.qdep)},qdep:function(a){a&&(typeof window.jQuery.fn!="undefined"&&!jQl.dq.length?jQl.rs(a):jQl.dq.push(a))},unqjQdep:function(){if(typeof window.jQuery.fn=="undefined")setTimeout(jQl.unqjQdep,50);else{for(var a=0;a<jQl.dq.length;a++)jQl.rs(jQl.dq[a]);jQl.dq=[]}},rs:function(a){var b=document.createElement("script");document.getElementsByTagName("head")[0].appendChild(b),b.text=a},loadxhr:function(a,b){var c;c=jQl.getxo(),c.onreadystatechange=function(){c.readyState!=4||200!=c.status||b(c.responseText,a)};try{c.open("GET",a,!0),c.send("")}catch(d){}},getxo:function(){var a=!1;try{a=new XMLHttpRequest}catch(b){for(var c=["MSXML2.XMLHTTP.5.0","MSXML2.XMLHTTP.4.0","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP","Microsoft.XMLHTTP"],d=0;d<c.length;++d){try{a=new ActiveXObject(c[d])}catch(e){continue}break}}finally{return a}}};if(typeof window.jQuery=="undefined")var $=jQl.ready,jQuery=$;jQl.loadjQdep("/wp-content/themes/dynamic/js/main-02.min.js?v=20131007"),jQl.loadjQdep("/wp-content/themes/dynamic/js/site-scripts.js")/*]]>*/</script>
+
+
+<script src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/dynevents.min.js" type="text/javascript"></script>
+<script>(function(d, s) {
+	  var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+	    if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.src = url; js.id = id;
+	    fjs.parentNode.insertBefore(js, fjs);
+	  };
+	  load("//connect.facebook.net/en_US/all.js#xfbml=1", "fbjssdk");
+	  // load("https://apis.google.com/js/plusone.js", "gplus1js");
+	  load("//platform.twitter.com/widgets.js", "tweetjs");
+	  load("//platform.linkedin.com/in.js", "linkedin");
+	}(document, "script"));</script><script type="text/javascript">$(function(){var a=$("#blog-cta-content");a.hide();$("#blog-cta-open").on("click",function(b){b.preventDefault();a.slideToggle(600)})});</script><!-- Google Tag Manager -->
+<noscript>&lt;iframe src="//www.googletagmanager.com/ns.html?id=GTM-M7FCP7"
+height="0" width="0" style="display:none;visibility:hidden"&gt;&lt;/iframe&gt;</noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M7FCP7');</script>
+<!-- End Google Tag Manager -->
+
+
+
+
+<script type="text/javascript" id="">(function(){function b(){!1===c&&(c=!0,Munchkin.init("982-ASW-482"))}var c=!1,a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=document.location.protocol+"//munchkin.marketo.net/munchkin.js";a.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||b()};a.onload=b;document.getElementsByTagName("head")[0].appendChild(a)})();</script><script type="text/javascript" id="">(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src="https://apis.google.com/js/plusone.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script><div style="display: none; visibility: hidden;"><script async="null" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/dyn.beacon.v4.js" id="beaconcfg" data-id="0005"></script></div><script type="text/javascript" id="" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/bizible.js"></script><script type="text/javascript" id="">(function(){var c=$(".optly-products-promo"),a=$(".optly-products-promo").attr("data"),b=$(".optly-solutions-promo"),e=$(".optly-solutions-promo").attr("data"),f=$(".optly-resources-promo-left"),g=$(".optly-resources-promo-left").attr("data"),h=$(".optly-resources-promo-right"),d=$(".optly-resources-promo-right").attr("data"),l=$(".optly-company-promo"),m=$(".optly-company-promo").attr("data"),k=[c,b,f,h,l],n=[a,e,g,d,m];$.each(k,function(a,b){k[a].on("mousedown",function(){window.optimizely.push({type:"event",
+eventName:"nav_promo_click",tags:{promo_type:n[a]}})})})})();(function(){var c=$(".optly-sign-in"),a=$(".optly-my-dyn-dns"),b=$(".optly-managed-dns"),e=$(".optly-email-delivery"),f=$(".optly-internet-intelligence"),g=$(".optly-ii-network"),h=$(".optly-ii-transit"),d=[c,a,b,e,f,g,h];$.each(d,function(a,b){d[a].on("mousedown",function(){window.optimizely.push({type:"event",eventName:"clicked_sign_in",tags:{sign_in_type:$(this).text().trim()}})})})})();
+(function(){var c=Date.now();window.optimizely=window.optimizely||[];window.myOuterWistiaInterval=setInterval(function(){window.wistiaEmbeds&&(wistiaEmbeds.onFind(function(a){a.ready(function(){window.myWistiaInterval=setInterval(function(){!0===a.hasData()&&(a.bind("secondchange",function(b){b===Math.floor(.25*a.duration())&&window.optimizely.push({type:"event",eventName:"wistia_25"});b===Math.floor(.5*a.duration())&&window.optimizely.push({type:"event",eventName:"wistia_50"});b===Math.floor(.75*
+a.duration())&&window.optimizely.push({type:"event",eventName:"wistia_75"})}),a.bind("play",function(){window.optimizely.push({type:"event",eventName:"wistia_video_started"})}),a.bind("pause",function(){window.optimizely.push({type:"event",eventName:"wistia_video_paused"})}),a.bind("end",function(){window.optimizely.push({type:"event",eventName:"wistia_video_finished"})}));clearInterval(window.myWistiaInterval)})},50)}),c+3E3<=Date.now()&&clearInterval(window.myOuterWistiaInterval))},200)})();</script><div style="display: none; visibility: hidden;">
+<script>var ezt=ezt||[];(function(){var a=document.createElement("script");a.src=("https:"==document.location.protocol?"https://secure":"http://pixel")+".quantserve.com/aquant.js?a\x3dp-9rewpXa2NLpKr";a.async=!0;a.type="text/javascript";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();ezt.push({qacct:"p-9rewpXa2NLpKr",orderid:"",revenue:""});</script>
+<noscript></noscript>
+</div><script type="text/javascript" id="">!function(){var b=document.createElement("script");b.type="text/javascript";b.async=!0;b.src="//configusa.veinteractive.com/tags/E0558F8D/B2EF/443A/A6DA/CA4B6BF52D26/tag.js";var a=document.getElementsByTagName("head")[0];a?a.appendChild(b,a):(a=document.getElementsByTagName("script")[0],a.parentNode.insertBefore(b,a))}();</script><script type="text/javascript" id="">(function(a,b,c,d,e){a=b.createElement(c);b=b.getElementsByTagName(c)[0];a.async=1;a.id=e;a.src=("https:"==document.location.protocol?"https://":"http://")+d;b.parentNode.insertBefore(a,b)})(window,document,"script","scripts.demandbase.com/4yYUFLVN.min.js","demandbase_js_lib");</script><iframe name="oauth2relay649873515" id="oauth2relay649873515" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/postmessageRelay.html" tabindex="-1" aria-hidden="true" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe><img src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/ipv" style="display: none;"><img style="display:none" alt="Demandbase pixel" id="db_pixel_ad" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/pixel"><img style="display:none" alt="Demandbase pixel" id="db_pixel_rt" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/pixel(1)"><iframe id="veUtilsIframe" width="0" height="0" style="visibility: hidden; display: none; border: none;" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/saved_resource.html"></iframe><iframe id="1477386668521" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/iframeStorage.html" style="display: none;"></iframe><div id="evergage-tooltip-amb2a8Ha" class="evergage-tooltip evergage-qtip   evergage-jgrowl evergage-top evergage-tooltip-bar evergage-tooltip-pos-tc evergage-tooltip-focus" tracking="false" role="alert" aria-live="polite" aria-atomic="false" aria-describedby="evergage-tooltip-amb2a8Ha-content" aria-hidden="false" style="background: rgb(50, 80, 88); height: 60px; width: 243px; text-align: center; padding: 15px; visibility: visible; box-sizing: border-box; display: block; z-index: 1000203; top: 0px; left: -182.5px;"><style>
+@media screen and (max-width:600px), screen and (max-device-width:600px){
+.uk-button-small{
+padding:0 14px !important;
+line-height:30px !important;
+color:#000;
+margin-top:10px;
+}
+#evergage-tooltip-amb2a8Ha{height:95px!important}
+}
+</style>
+<h5 class="uk-display-inline white uk-margin-right">
+The Fastest, Most Secure and Reliable DNS
+</h5>
+<a href="http://dyn.com/managed-dns/" class="uk-button uk-button-small uk-button-callout">
+Learn More
+</a>
+<a href="javascript:;" title="Close Message" evergage-dismissonclick="evergage-dismissonclick" evergage-closeicon="evergage-closeicon" class="white" style="text-align: center; text-decoration: none; font-weight: normal; font-size: 16px; position: absolute; top: 0px; right: 0px; height: 28px; width: 28px; line-height: 28px; padding: 0px;">
+×
+</a></div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" src="./What is DNS_ Why It&#39;s Important &amp; Why We Need It_files/saved_resource(1).html"></iframe></body></html>

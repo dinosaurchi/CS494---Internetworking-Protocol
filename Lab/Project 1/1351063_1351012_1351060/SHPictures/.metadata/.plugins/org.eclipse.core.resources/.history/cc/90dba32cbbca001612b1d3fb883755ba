@@ -1,0 +1,47 @@
+package Entity;
+
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class SearchResult {
+	public static final int THUMBNAIL_DIMENSION_SIZE = 200;
+	
+	private String imageId;
+	private BufferedImage thumbnail;
+	
+	public String getImageId() {
+		return imageId;
+	}
+	public void setImageId(String imageId) {
+		this.imageId = imageId;
+	}
+	public BufferedImage getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String imageLink) {
+		try {
+			BufferedImage temp = ImageIO.read(new File(imageLink));
+			this.thumbnail = normalizingSize(temp);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private BufferedImage normalizingSize(BufferedImage src_image) {
+		int w = src_image.getWidth(), h = src_image.getHeight();
+		int max_d = Math.min(w, h);
+		BufferedImage croppedImage = src_image.getSubimage(0, 0, max_d, max_d);
+		Image temp = croppedImage.getScaledInstance(THUMBNAIL_DIMENSION_SIZE, THUMBNAIL_DIMENSION_SIZE, Image.SCALE_DEFAULT);
+		BufferedImage dimg = new BufferedImage(THUMBNAIL_DIMENSION_SIZE, THUMBNAIL_DIMENSION_SIZE, BufferedImage.TYPE_INT_ARGB);
+		
+		Graphics2D g2d = dimg.createGraphics();
+	    g2d.drawImage(temp, 0, 0, null);
+	    g2d.dispose();
+		
+		return dimg;
+	}
+}

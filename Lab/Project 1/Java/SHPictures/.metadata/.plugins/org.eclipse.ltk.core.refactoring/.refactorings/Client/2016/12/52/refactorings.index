@@ -1,0 +1,6 @@
+1482551072048	Rename local variable 'lblUsername'
+1482551086612	Rename local variable 'lblPassword'
+1482572452880	Rename method 'initialize'
+1482583187424	Encapsulate field 'isOnline'
+1482589079762	Delete element
+1482592835693	Rename field 'isSuccessful'

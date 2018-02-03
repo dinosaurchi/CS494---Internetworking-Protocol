@@ -1,0 +1,22 @@
+package support;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class SupportFunction {
+	public static String storeImage(String storeDirectory, String id, String extension, BufferedImage image) {
+		String storePath = storeDirectory + "/" + id + "." + extension;
+		File outputfile = new File(storePath);
+	    try {
+			if (ImageIO.write(image, "." + extension, outputfile))
+				return storePath;
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+}

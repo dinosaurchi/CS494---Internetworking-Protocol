@@ -1,0 +1,100 @@
+
+<!-- saved from url=(0064)http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/arp.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <meta name="GENERATOR" content="Adobe PageMill 3.0 Mac">
+  <title>Address Resolution Protocol (arp)</title>
+		<style type="text/css" media="all"><!--
+.ds1 /*agl rulekind: base;*/ { font-weight: bold; }
+--></style>
+	</head>
+<body>
+
+<h1>Address Resolution Protocol (arp)</h1>
+
+<p>The address resolution protocol (arp) is a protocol used by the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip.html">Internet Protocol (IP)</a> [<a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/arp.html#Anchor-49575">RFC826]</a>, specifically IPv4, to map <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip-address.html">IP network addresses</a> to the hardware addresses used by a data link protocol. The protocol operates below the network layer as a part of the interface between the OSI network and OSI link layer. It is used when <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip-enet.html">IPv4 is used over Ethernet.</a></p>
+
+<p>The term address resolution refers to the process of finding
+an address of a computer in a network. The address is "resolved"
+using a protocol in which a piece of information is sent by a
+client process executing on the local computer to a server process
+executing on a remote computer. The information received by the
+server allows the server to uniquely identify the network system
+for which the address was required and therefore to provide the
+required address. The address resolution procedure is completed
+when the client receives a response from the server containing
+the required address.</p>
+
+<p>An <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/enet.html">Ethernet</a> network uses
+two hardware addresses which identify the source and destination
+of each frame sent by the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/enet.html">Ethernet</a>.
+The destination address (all 1's) may also identify a <a href="http://www.erg.abdn.ac.uk/users/gorry/course/intro-pages/uni-b-mcast.html">broadcast</a>
+packet (to be sent to all connected computers). The hardware address
+is also known as the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/mac.html">Medium Access
+Control (MAC) address</a>, in reference to the standards which
+define <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/enet.html">Ethernet</a>. Each computer
+<a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/nic.html">network interface card</a> is allocated a globally unique 6 byte link address when the factory manufactures the card (stored in a PROM). This is the normal link source address used by an interface. A computer sends all packets which it creates with its own hardware source link address, and receives all packets which match the same hardware address in the destination field or one (or more) pre-selected broadcast/multicast addresses. </p>
+
+<p>The Ethernet address is a link layer address and is dependent
+on the interface card which is used. IP operates at the network
+layer and is not concerned with the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip-address.html">link addresses</a> of individual nodes which are to be used.The address resolution protocol (arp) is therefore used to translate between the two types of address. The arp client and server processes operate on all computers using <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip-enet.html">IP over Ethernet</a>. The processes are normally implemented as part of the software driver that drives the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/nic.html">network
+interface card</a>. </p>
+
+<p>There are four types of arp messages that may be sent by the arp protocol. These are identified by four values in the "operation" field of an arp message. The types of message are:</p>
+
+<ol>
+  <li>ARP request
+  </li><li>ARP reply
+  </li><li>RARP request
+  </li><li>RARP reply
+</li></ol>
+		<p>The format of an <a name="Anchor-arp-message"></a>arp message is shown below:</p>
+		<center><i><img src="./Address Resolution Protocol (arp)_files/arp-header.gif" align="BOTTOM" width="294" height="140" naturalsizeflag="3"></i></center>
+		<center><i>Format of an arp message used to resolve the remote
+<a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/mac.html">MAC Hardware Address </a>(HA)</i></center>
+		<p>To reduce the number of address resolution requests, a client
+normally <b>caches</b> resolved addresses for a (short) period
+of time. The arp cache is of a finite size, and would become full
+of incomplete and obsolete entries for computers that are not
+in use if it was allowed to grow without check. The arp cache
+is therefore periodically flushed of all entries. This deletes
+unused entries and frees space in the cache. It also removes any
+unsuccessful attempts to contact computers which are not currently
+running.</p>
+		<p>If a host changes the MAC address it is using, this can be detected by other hosts when the cache entry is deleted and a fresh arp message is sent to establish the new association. The use of gratuitous arp (e.g. triggered when the new NIC interface is enabled with an IP address) provides a more rapid update of this information.</p>
+		<h3>Example of <a name="Anchor-use-14210"></a>use of the Address Resolution Protocol (arp)</h3>
+		<p>The figure below shows the use of arp when a computer tries
+to contact a remote computer on the same <a href="http://www.erg.abdn.ac.uk/users/gorry/course/intro-pages/lan.html">LAN</a>
+(known as "sysa") using the "<a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/icmp.html">ping"
+program</a>. It is assumed that no previous IP datagrams have
+been received form this computer, and therefore arp must first
+be used to identify the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/mac.html">MAC</a>
+address of the remote computer.</p>
+		<div align="center">
+			<p><img src="./Address Resolution Protocol (arp)_files/arp-encap.gif" width="249" height="69" border="0"></p>
+		</div>
+		<p>The <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/arp.html#Anchor-arp-message">arp request message</a> ("who is X.X.X.X tell Y.Y.Y.Y", where X.X.X.X and Y.Y.Y.Y are <a href="http://www.erg.abdn.ac.uk/users/gorry/course/inet-pages/ip-address.html">IP addresses</a>) is sent using the Ethernet <a href="http://www.erg.abdn.ac.uk/users/gorry/course/intro-pages/uni-b-mcast.html">broadcast</a> address, and an Ethernet protocol type of value 0x806. Since it is broadcast, it is received by all systems in the same collision domain (<a href="http://www.erg.abdn.ac.uk/users/gorry/course/intro-pages/lan.html">LAN</a>). This is ensures that is the target of the query is connected to the network, it will receive a copy of the query. Only this system responds. The other systems discard the packet silently.</p>
+		<p>The target system forms an arp response ("X.X.X.X is hh:hh:hh:hh:hh:hh", where hh:hh:hh:hh:hh:hh is the <a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/nic.html">Ethernet source address</a> of the computer with the IP address of X.X.X.X). This packet is <a href="http://www.erg.abdn.ac.uk/users/gorry/course/intro-pages/uni-b-mcast.html">unicast</a> to the address of the computer sending the query (in this case Y.Y.Y.Y). Since the original request also included the hardware address (<a href="http://www.erg.abdn.ac.uk/users/gorry/course/lan-pages/nic.html">Ethernet source address)</a> of the requesting computer, this is already known, and doesn't require another arp message to find this out.</p>
+		<div align="center">
+			<h3><img src="./Address Resolution Protocol (arp)_files/arp-eg.gif" width="467" height="364" align="BOTTOM" naturalsizeflag="3"></h3>
+		</div>
+		<p>
+		</p><p><span class="ds1">Gratuitous ARP</span></p>
+		<p>Gratuitous ARP is used when a node (end system) has selected an IP address and then wishes to defend its chosen address on the local area network (i.e. to check no other node is using the same IP address). It can also be used to force a common view of the node's IP address (e.g. after the IP address has changed).</p>
+		<p>Use of this is common when an interface is first configured, as the node attempts to clear out any stale caches that might be present on other hosts.  The node simply sends an arp request for itself. </p>
+		<p><span class="ds1">Proxy ARP</span></p>
+		<p>Proxy ARP is the name given when a node responds to an arp request on behalf of another node. This is commonly used to redirect traffic sent to one IP address to another system.</p>
+		<p>Proxy ARP can also be used to subvert traffic away from the intended recipient. By responding instead of the intended recipient, a node can pretend to be a different node in a network, and therefore force traffic directed to the node to be redirected to itself. The node can then view the traffic (e.g. before forwarding this to the originally intended node) or could modify the traffic. Improper use of Proxy ARP is therefore a significant security vulnerability and some networks therefore implement systems to detect this. Gratuitous ARP can also help defend the correct IP to MAC bindings.</p>
+		<p><i>Standards Documents:</i></p>
+		<blockquote>
+			<p><a name="Anchor-49575"></a>C. Hornig, <i><a href="http://www.ietf.org/rfc/rfc894.txt">Standard for the transmission of IP datagrams over Ethernet networks, RFC894</a></i></p>
+			<p>D.C. Plummer, <i><a href="http://www.ietf.org/rfc/rfc826.txt">Ethernet Address Resolution Protocol: Or converting network protocol addresses to 48.bit Ethernet address for transmission on Ethernet hardware, RFC826.</a></i></p>
+			<p><a href="http://www.iana.org/assignments/ethernet-numbers"><i>List of Ethernet Frame Types</i></a></p>
+		</blockquote>
+		<p>
+			</p><hr align="LEFT">
+		<i><a href="http://www.erg.abdn.ac.uk/users/gorry/">Gorry
+Fairhurst</a> -  Date: 1/12/2005 <a href="http://www.erg.abdn.ac.uk/users/gorry/course/road-map.html">EG3557</a></i>
+		<hr align="LEFT">
+	
+
+</body></html>

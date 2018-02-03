@@ -1,0 +1,8 @@
+package Packet;
+
+import java.awt.image.BufferedImage;
+import java.io.Serializable;
+
+public class MyBufferedImage extends BufferedImage implements Serializable {
+
+}

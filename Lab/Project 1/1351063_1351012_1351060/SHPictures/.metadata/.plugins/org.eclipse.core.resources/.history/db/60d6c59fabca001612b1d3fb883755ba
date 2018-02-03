@@ -1,0 +1,42 @@
+package Packet;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+
+import javax.imageio.ImageIO;
+
+import Entity.MyImageInfo;
+
+public class DownloadResultPacket extends Packet implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8133763017302414903L;
+	public static final String PACKET_TYPE = "DOWNLOADRESULT";
+	
+	private MyImageInfo imageInfo;
+	private BufferedImage downloadImage;
+	
+	public void setDownloadImageInfo(MyImageInfo imageInfo) {
+		this.imageInfo = imageInfo;
+	}
+
+	public MyImageInfo getDownloadImageInfo() {
+		return imageInfo;
+	}
+
+	public BufferedImage getDownloadImage() {
+		return downloadImage;
+	}
+
+	public void setDownloadImage(String imageLink) {
+		try {
+			this.downloadImage = ImageIO.read(new File(imageLink));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

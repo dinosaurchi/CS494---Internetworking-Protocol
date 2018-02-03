@@ -1,0 +1,8 @@
+Nov 1, 2016 
+	
+	Code socket programming:
+		Server - many clients 
+		(A Chat program)
+
+	Thread pool ?? 
+	

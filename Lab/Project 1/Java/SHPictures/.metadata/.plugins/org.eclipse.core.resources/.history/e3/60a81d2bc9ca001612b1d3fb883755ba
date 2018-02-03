@@ -1,0 +1,53 @@
+package database;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Entity.User;
+import support.SupportFunction;
+
+public class UserDatabase {
+	private DatabaseConnect database = null;
+	private String USER_TABLE = "User";
+	
+	public UserDatabase(DatabaseConnect db) {
+		this.database = db;
+	}
+	
+	public boolean put(User user) {
+		if (database == null || user == null)
+			return -1;
+		
+		String attributes = SupportFunction.parseToQueryString(User.getAllAttributeNames(), false, true);
+		String values = SupportFunction.parseToQueryString(user.getAllValues(), true, true);
+		String query = "INSERT INTO " + "`" + USER_TABLE + "`" + attributes + " VALUES " + values + ";";
+				
+		try {
+			return database.putDataUser(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean isExist(String username, String password) {
+		if (username == null || password == null)
+			return false;
+		
+		String query = "SELECT *" 
+			+ " FROM " + "`" + USER_TABLE + "`" 
+				+ " WHERE " + " username = '" + username + "' AND password = '" + password + "'";
+		try {
+			ArrayList<HashMap<String, String>> results = database.getData(query, DatabaseConnect.RETRIEVE_ALL_ENTITIES);
+			if (results != null && results.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+}

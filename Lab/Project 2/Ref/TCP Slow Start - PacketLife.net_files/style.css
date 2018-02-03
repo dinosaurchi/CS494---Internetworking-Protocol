@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* CSS reset */
+* {
+    margin: 0;
+    padding: 0;
+	position:absolute;
+}
+
+body{
+	cursor:pointer;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.ie-fallback{
+	position:absolute;
+	left: 0px;
+	top: 0px;
+	z-index:99969;
+}
+
+#fallback{
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:99969;
+}
+
+#ad{
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+/* banner */
+#banner {
+	width:728px;
+	height:90px;
+	overflow: hidden;
+	background:#262626;
+ 	border: #d4d1da 1px solid;
+ 	box-sizing: border-box;
+
+}
+
+#bg{
+	width:728px;
+	height:90px;
+	left:602px;
+	top:0px;
+	background:url(../images/bg.png) no-repeat;
+}
+
+#logos{
+	width:145px;
+	height:90px;
+	left:-145px;
+	top:0px;
+	background: url(../images/header.png) no-repeat;
+}
+
+
+#t1{
+	width:728px;
+	height:90px;
+	left:1300px;
+	top:0px;
+	background:url(../images/t1.png) no-repeat;
+	opacity:1;
+}
+
+#t2{
+	width:728px;
+	height:90px;
+	left:1300px;
+	top:0px;
+	background:url(../images/t2.png) no-repeat;
+	opacity:1;
+}
+
+#t3{
+	width:728px;
+	height:90px;
+	left:1300px;
+	top:0px;
+	background:url(../images/t3.png) no-repeat;
+}
+
+/*#cta{
+	width:728px;
+	height:90px;
+	left:1300px;
+	top:0px;
+	background:url(../images/cta.png) no-repeat;
+}*/
